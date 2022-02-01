@@ -18,8 +18,6 @@ The project uses MVVM architecture pattern.
 * [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started) - Android Jetpack's Navigation component helps in implementing
 navigation between fragments
 * [Dagger 2](https://dagger.dev/dev-guide/) - For Dependency Injection.
-* [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview?hl=in) - Allow pagination of the Data.
-* [Retrofit](https://square.github.io/retrofit/) - To access the Rest Api
 * [Kotlin Flow](https://developer.android.com/kotlin/flow) - To access data sequentially
 
 
@@ -29,3 +27,5 @@ navigation between fragments
 
 ## Demo
 <img src="demo/demo.gif" width=300/>
+=======
+# AppScheduler
