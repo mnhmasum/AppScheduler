@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.meldcx.appscheduler.ui.main.MainViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.meldcx.appscheduler.ui.main.AlarmRecyclerViewAdapter" />
+
+        <variable
+            name="activity"
+            type="com.meldcx.appscheduler.ui.main.MainActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAddAlarm"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setAdapter="@{adapter}"
+            app:submitList="@{viewModel.alarmsLiveData}" />
+
+        <Button
+            android:id="@+id/buttonAddAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:onClick="@{(view) -> activity.openAlarmActivity()}"
+            android:text="Add Alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
