@@ -1,11 +1,12 @@
 package com.meldcx.appscheduler.ui.applist
 
-import android.content.pm.PackageManager
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meldcx.appscheduler.data.AppItem
+import com.meldcx.appscheduler.data.AppListIntent
+import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.repository.AppListRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,37 +14,36 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class AppListViewModel( pm: PackageManager) : ViewModel() {
-    val userIntent = Channel<MainIntent>(Channel.UNLIMITED)
-    private val _state = MutableStateFlow<MainState>(MainState.Idle)
-    val state: StateFlow<MainState>
-        get() = _state
-    var mutableLiveData: MutableLiveData<List<AppItem>>? = null
+class AppListViewModel(private val appListRepository: AppListRepository) : ViewModel() {
+    val appListIntent = Channel<AppListIntent>(Channel.UNLIMITED)
+    private val _dataState = MutableStateFlow<AppState>(AppState.Idle)
+    val dataState: StateFlow<AppState>
+        get() = _dataState
 
     init {
-        //handleIntent()
-        val appRepository = AppListRepository(pm)
-        mutableLiveData = appRepository.getApps()
+        handleIntentAction()
     }
 
-    private fun handleIntent() {
+    private fun handleIntentAction() {
         viewModelScope.launch {
-            userIntent.consumeAsFlow().collect {
+            appListIntent.consumeAsFlow().collect {
                 when (it) {
-                    is MainIntent.FetchUser -> fetchUser()
+                    is AppListIntent.FetchApps -> fetchInstalledApps()
                 }
             }
         }
     }
 
-    private fun fetchUser() {
-        viewModelScope.launch {
-            _state.value = MainState.Loading
-            _state.value = try {
-                MainState.Apps(ApiHelperImpl().getApps())
-            } catch (e: Exception) {
-                MainState.Error(e.localizedMessage)
-            }
+    private fun fetchInstalledApps() {
+        viewModelScope.launch(Dispatchers.Default) {
+            _dataState.value = AppState.Loading
+            _dataState.value = AppState.Apps(appListRepository.getApps())
+        }
+    }
+
+    fun selectApp(appItem: AppItem) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _dataState.value = AppState.App(appItem)
         }
     }
 }

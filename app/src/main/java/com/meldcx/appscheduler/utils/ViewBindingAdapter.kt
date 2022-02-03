@@ -23,35 +23,5 @@ fun submitList(recyclerView: RecyclerView, alarms: List<Alarm>?) {
 @BindingAdapter("submitAppList")
 fun submitAppList(recyclerView: RecyclerView, appItems: List<AppItem>?) {
     val adapter = recyclerView.adapter as AppListAdapter?
-    adapter?.setAlarms(appItems ?: listOf())
+    adapter?.setApps(appItems ?: listOf())
 }
-
-/*
-@Suppress("UNCHECKED_CAST")
-@BindingAdapter("submitList")
-fun submitList(recyclerView: RecyclerView, list: List<ListAdapterItem>?) {
-    val adapter = recyclerView.adapter as BaseAdapter<ViewDataBinding, ListAdapterItem>?
-    adapter?.updateData(list ?: listOf())
-}
-
-@BindingAdapter("manageState")
-fun manageState(progressBar: ProgressBar, state: Boolean) {
-    progressBar.visibility = if (state) View.VISIBLE else View.GONE
-}
-
-@BindingAdapter("setImage")
-fun setImage(imageView: ShapeableImageView, image: Int) {
-    Glide.with(imageView.context)
-        .load(image)
-        .into(imageView)
-}
-
-@BindingAdapter("setFavouriteCondition")
-fun setFavouriteCondition(imageView: ShapeableImageView, isFavourite: Boolean) {
-    if (isFavourite) {
-        imageView.setImageResource(R.drawable.ic_favorite)
-    } else {
-        imageView.setImageResource(R.drawable.ic_favorite_border)
-    }
-
-}*/

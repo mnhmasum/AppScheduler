@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.meldcx.appscheduler.ui.main.MainViewModel" />
@@ -20,16 +21,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/gray"
+            app:title="App Scheduler" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/buttonAddAlarm"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="1.0"
             app:setAdapter="@{adapter}"
             app:submitList="@{viewModel.alarmsLiveData}" />
 
@@ -37,8 +49,9 @@
             android:id="@+id/buttonAddAlarm"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
             android:onClick="@{(view) -> activity.openAlarmActivity()}"
-            android:text="Add Alarm"
+            android:text="ADD NEW SCHEDULE"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -3,10 +3,12 @@ package com.meldcx.appscheduler.di
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.lifecycle.ViewModel
 import dagger.Module
 import dagger.Provides
 import com.meldcx.appscheduler.di.scope.PerActivity
 import com.meldcx.appscheduler.repository.AlarmRepository
+import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmViewModel
@@ -25,6 +27,11 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
+    fun provideAppListRepository(): AppListRepository {
+        return AppListRepository(context.packageManager)
+    }
+
+    @Provides
     @PerActivity
     fun provideAlarmListViewModel(alarmRepository: AlarmRepository): MainViewModel {
         return MainViewModel(alarmRepository)
@@ -38,9 +45,8 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideAppListViewModel(): AppListViewModel {
-        val pm:PackageManager = context.packageManager
-        return AppListViewModel(pm)
+    fun provideAppListViewModel(appListRepository: AppListRepository): AppListViewModel {
+        return AppListViewModel(appListRepository)
     }
 
     @Provides

@@ -20,19 +20,10 @@ class AppListAdapter(private var appListViewModel: AppListViewModel) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
         val binding = DataBindingUtil.inflate<RecyclerviewAppBinding>(LayoutInflater.from(parent.context), R.layout.recyclerview_app, parent, false)
-        //binding.adapter = this
+        binding.adapter = this
         this.context = parent.context
+        binding.viewModel = appListViewModel
         return AlarmViewHolder(binding)
-    }
-
-    fun onToggle(alarm: Alarm, isChecked: Boolean) {
-        if (isChecked) {
-            alarm.schedule(context)
-            //appListViewModel.update(alarm)
-        } else {
-            alarm.cancelAlarm(context)
-            //appListViewModel.update(alarm)
-        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -40,15 +31,15 @@ class AppListAdapter(private var appListViewModel: AppListViewModel) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: AlarmViewHolder, position: Int) {
-        //holder.recyclerviewAppBinding.appItem = apps[position]
+        holder.recyclerviewAppBinding.appItem = apps[position]
     }
 
     override fun getItemCount(): Int {
         return apps.size
     }
 
-    fun setAlarms(alarms: List<AppItem>) {
-        this.apps = alarms
+    fun setApps(apps: List<AppItem>) {
+        this.apps = apps
         notifyDataSetChanged()
     }
 

@@ -3,72 +3,37 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.meldcx.appscheduler.ui.applist.AppListViewModel" />
+
+        <variable
+            name="appItem"
+            type="com.meldcx.appscheduler.data.AppItem" />
+
+        <variable
+            name="adapter"
+            type="com.meldcx.appscheduler.ui.applist.AppListAdapter" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="6dp">
+            android:layout_height="48dp"
+            app:cardCornerRadius="4dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test"/>
-            <!--<LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="6dp">
-
-                <TextView
-                    android:id="@+id/item_alarm_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{alarm.hour + `:` + alarm.minute}"
-                    android:textSize="36sp" />
-
-                <ImageView
-                    android:id="@+id/item_alarm_recurring"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/item_alarm_recurringDays"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/item_alarm_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{alarm.title}"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <Switch
-                    android:id="@+id/item_alarm_started"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="@{alarm.started}"
-                    android:onCheckedChanged="@{(c,b)->adapter.onToggle(alarm, b)}" />
-
-            </LinearLayout>-->
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:onClick="@{()-> viewModel.selectApp(appItem)}"
+                android:padding="4dp"
+                android:text="@{appItem.appId}" />
 
         </androidx.cardview.widget.CardView>
 

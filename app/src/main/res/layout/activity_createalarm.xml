@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.meldcx.appscheduler.ui.createalarm.CreateAlarmViewModel" />
@@ -17,29 +19,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Create New" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/fragment_createalarm_scheduleAlarmHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="App"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_app_package_name"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:hint="Select an app"
+                android:hint="Tap here to select an app"
+                android:minHeight="48dp"
                 android:onClick="@{()-> activity.openAppList()}"
-                android:text="com.napcosecurity.iBridge2.ui.splash.SplashActivity"
+                android:text=""
                 app:layout_constraintTop_toBottomOf="@+id/fragment_createalarm_scheduleAlarmHeading" />
 
             <LinearLayout
@@ -56,7 +70,8 @@
                     android:layout_weight="0.4"
                     android:text="Scheduling Time"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
 
                 <TimePicker
                     android:id="@+id/fragment_createalarm_timePicker"
@@ -71,8 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:onCheckedChanged="@{(button, bool)-> bool?layoutRecurringOptions.setVisibility(0):layoutRecurringOptions.setVisibility(8)}"
+                android:onCheckedChanged="@{(button, bool)-> bool?layoutRecurringOptions.setVisibility(View.VISIBLE):layoutRecurringOptions.setVisibility(View.GONE)}"
                 android:text="Recurring Task"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_createalarm_timePickerLayout" />
 
@@ -81,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@+id/check_recurring">
 
                 <CheckBox
@@ -134,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="@{()-> activity.createAlarm()}"
-                android:text="Schedule Task"
+                android:text="Schedule APP"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:layout_editor_absoluteX="133dp" />
 

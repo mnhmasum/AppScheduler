@@ -2,6 +2,7 @@ package com.meldcx.appscheduler.ui.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -37,6 +38,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         if (finishSelf) {
             finish()
         }
+    }
+
+    fun toast(message: String) {
+        Toast.makeText(this, "Toast: $message", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {

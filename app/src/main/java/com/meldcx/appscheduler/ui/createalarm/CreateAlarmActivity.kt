@@ -1,5 +1,9 @@
 package com.meldcx.appscheduler.ui.createalarm
 
+import android.app.Activity
+import android.content.Intent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.meldcx.appscheduler.data.Alarm
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.applist.AppListActivity
@@ -36,7 +40,7 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
     }
 
     fun openAppList(){
-        startActivity(AppListActivity::class.java, false)
+        startForResult.launch(Intent(this, AppListActivity::class.java))
     }
 
     private fun scheduleAlarm() {
@@ -60,5 +64,12 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
         createAlarmViewModel.insert(alarm)
         alarm.schedule(this)
         finish()
+    }
+
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            binding.textAppPackageName.text = intent?.getStringExtra("app_name")
+        }
     }
 }

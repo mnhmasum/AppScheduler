@@ -1,18 +1,24 @@
 package com.meldcx.appscheduler.ui.applist
 
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import android.app.Activity
+import android.content.Intent
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.meldcx.appscheduler.data.AppItem
+import com.meldcx.appscheduler.data.AppListIntent
+import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import dev.ronnie.imageloaderdagger2.R
 import dev.ronnie.imageloaderdagger2.databinding.ActivityAppListBinding
+import kotlinx.android.synthetic.main.activity_app_list.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AppListActivity : BaseActivity<ActivityAppListBinding>() {
     @Inject
-    lateinit var appListViewModel: AppListViewModel
+    lateinit var viewModel: AppListViewModel
 
     @Inject
     lateinit var appListAdapter: AppListAdapter
@@ -22,38 +28,39 @@ class AppListActivity : BaseActivity<ActivityAppListBinding>() {
     }
 
     override fun initComponents() {
-        val pm: PackageManager = packageManager
-        val appListViewModel = ViewModelProviders.of(
-            this, ViewModelFactory(pm)).get(AppListViewModel::class.java)
         binding.apply {
-            viewModel = appListViewModel
-            //adapter = appListAdapter
-            activity = this@AppListActivity
-        }
-
-        appListViewModel.mutableLiveData?.observe(this, Observer {
-            for (i in it) {
-                Log.d("All APPS", "initComponents: " + i.appLauncher)
-            }
-        })
-
-        /*lifecycleScope.launch {
-            appListViewModel.userIntent.send(MainIntent.FetchUser)
+            adapter = appListAdapter
         }
 
         lifecycleScope.launch {
-            appListViewModel.state.collect {
-                when (it) {
-                    is MainState.Idle-> Toast.makeText(this@AppListActivity, "ideal", Toast.LENGTH_SHORT).show()
-                    is MainState.Loading-> Toast.makeText(this@AppListActivity, "Loading", Toast.LENGTH_SHORT).show()
-                    is MainState.Apps-> Toast.makeText(this@AppListActivity, "Apps" + it.apps.size, Toast.LENGTH_SHORT).show()
-                }
+            launch {
+                viewModel.appListIntent.send(AppListIntent.FetchApps)
             }
-        }*/
+            launch {
+                viewModel.dataState.collect { render(it) }
+            }
+        }
 
+    }
+
+    private fun render(it: AppState) {
+        progressBar.isVisible = it is AppState.Loading
+        when (it) {
+            is AppState.Apps -> appListAdapter.setApps(it.data)
+            is AppState.App -> showSelectedApp(it.app)
+            is AppState.Error -> toast(it.error)
+        }
+    }
+
+    private fun showSelectedApp(it: AppItem) {
+        val data = Intent()
+        data.putExtra("app_name", it.appLauncher)
+        setResult(Activity.RESULT_OK, data)
+        finish()
     }
 
     override fun performDependencyInjection(activityComponent: MainActivityComponent) {
         activityComponent.inject(this)
     }
+
 }
