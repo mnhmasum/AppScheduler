@@ -37,7 +37,7 @@ class AppListViewModel(private val appListRepository: AppListRepository) : ViewM
     private fun fetchInstalledApps() {
         viewModelScope.launch(Dispatchers.Default) {
             _dataState.value = AppState.Loading
-            _dataState.value = AppState.Apps(appListRepository.getApps())
+            _dataState.value = AppState.Apps(appListRepository.getInstalledApps())
         }
     }
 

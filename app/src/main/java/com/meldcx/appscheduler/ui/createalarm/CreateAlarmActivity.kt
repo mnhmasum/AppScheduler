@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
     @Inject
-    lateinit var createAlarmViewModel: CreateAlarmViewModel
+    lateinit var viewModel: CreateAlarmViewModel
 
     override fun performDependencyInjection(activityComponent: MainActivityComponent) {
         activityComponent.inject(this)
@@ -29,7 +29,7 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
 
     override fun initComponents() {
         binding.apply {
-            viewModel = createAlarmViewModel
+            viewModel = viewModel
             lifecycleOwner = this@CreateAlarmActivity
             activity = this@CreateAlarmActivity
         }
@@ -61,7 +61,7 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
             check_sat.isChecked,
             check_sun.isChecked
         )
-        createAlarmViewModel.insert(alarm)
+        viewModel.insert(alarm)
         alarm.schedule(this)
         finish()
     }
