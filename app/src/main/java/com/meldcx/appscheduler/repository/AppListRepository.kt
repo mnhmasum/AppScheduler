@@ -13,8 +13,8 @@ class AppListRepository(private val pm: PackageManager) {
 
         for (packageInfo in packages) {
             when {
-                packageInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP === 1 -> Unit
-                packageInfo.flags and ApplicationInfo.FLAG_SYSTEM === 1 -> Unit
+                packageInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP === 1 -> {}
+                packageInfo.flags and ApplicationInfo.FLAG_SYSTEM === 1 -> {}
                 else -> {
                     val appName = pm.getApplicationLabel(packageInfo).toString()
                     val appLauncher = packageInfo.packageName

@@ -51,9 +51,11 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
 
     private fun startAlarmService(context: Context, intent: Intent) {
         val intentService = Intent(context, AlarmService::class.java)
-        intentService.putExtra(TITLE, intent.getStringExtra(TITLE))
         intentService.putExtra(ALARMID, intent.getStringExtra(ALARMID))
+        intentService.putExtra(APPID, intent.getStringExtra(APPID))
+        intentService.putExtra(TITLE, intent.getStringExtra(TITLE))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.stopService(intentService)
             context.startForegroundService(intentService)
         } else {
             context.startService(intentService)
@@ -80,5 +82,6 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
         const val RECURRING = "RECURRING"
         const val TITLE = "TITLE"
         const val ALARMID = "ALARM_ID"
+        const val APPID = "app_id"
     }
 }

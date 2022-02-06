@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -16,7 +17,7 @@
             type="com.meldcx.appscheduler.ui.main.MainViewModel" />
     </data>
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -27,7 +28,7 @@
             app:cardCornerRadius="6dp"
             app:cardElevation="6dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -47,23 +48,21 @@
                     android:layout_margin="2dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_toLeftOf="@+id/item_alarm_started"
+                    android:layout_toRightOf="@+id/item_alarm_time"
+                    android:gravity="center_vertical"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/item_alarm_recurringDays"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/item_alarm_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{alarm.title}"
-                        android:textSize="12sp" />
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -71,11 +70,12 @@
                     android:id="@+id/item_alarm_started"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:checked="@{alarm.started}"
                     android:onCheckedChanged="@{(c,b)->adapter.onToggle(alarm, b)}" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 

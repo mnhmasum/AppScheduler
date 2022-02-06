@@ -8,9 +8,6 @@ import com.meldcx.appscheduler.data.AppDatabase
 import com.meldcx.appscheduler.di.qualifier.DatabaseName
 import javax.inject.Singleton
 
-/**
- * Created by nazmul 02/08/2021.
- */
 @Module
 class ApplicationModule(private val mApplication: Application) {
 
@@ -30,10 +27,5 @@ class ApplicationModule(private val mApplication: Application) {
     fun provideApplication(): Application {
         return mApplication
     }
-
-  /*  @Provides
-    @Singleton
-    fun provideAppInfo():AppInfo {
-        return AppInfo()
-    }*/
+    
 }

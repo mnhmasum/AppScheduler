@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
     @Inject
-    lateinit var viewModel: CreateAlarmViewModel
+    lateinit var createTaskViewModel: CreateAlarmViewModel
 
     override fun performDependencyInjection(activityComponent: MainActivityComponent) {
         activityComponent.inject(this)
@@ -29,17 +29,27 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
 
     override fun initComponents() {
         binding.apply {
-            viewModel = viewModel
-            lifecycleOwner = this@CreateAlarmActivity
+            toolbar.setNavigationOnClickListener { finish() }
+        }
+
+        binding.apply {
+            viewModel = createTaskViewModel
             activity = this@CreateAlarmActivity
         }
+
+        /*viewModel.formErrors.observe(this, {
+            Log.d("Observed", "initComponents: " + it.size)
+            if (it.size > 0) {
+                binding.textView3.text = "Please select an App"
+            }
+        })*/
     }
 
     fun createAlarm() {
         scheduleAlarm()
     }
 
-    fun openAppList(){
+    fun openAppList() {
         startForResult.launch(Intent(this, AppListActivity::class.java))
     }
 
@@ -50,6 +60,7 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
             TimePickerUtil.getTimePickerHour(fragment_createalarm_timePicker),
             TimePickerUtil.getTimePickerMinute(fragment_createalarm_timePicker),
             text_app_package_name.text.toString(),
+            mAppId!!,
             System.currentTimeMillis(),
             true,
             check_recurring.isChecked,
@@ -61,15 +72,21 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
             check_sat.isChecked,
             check_sun.isChecked
         )
-        viewModel.insert(alarm)
-        alarm.schedule(this)
-        finish()
-    }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            binding.textAppPackageName.text = intent?.getStringExtra("app_name")
+        if (createTaskViewModel.isTaskValid(alarm)) {
+            createTaskViewModel.insert(alarm)
+            alarm.schedule(this)
+            finish()
         }
     }
+
+    private var mAppId: String = ""
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                binding.textAppPackageName.text = intent?.getStringExtra("app_name")
+                mAppId = intent?.getStringExtra("app_id")!!
+            }
+        }
 }

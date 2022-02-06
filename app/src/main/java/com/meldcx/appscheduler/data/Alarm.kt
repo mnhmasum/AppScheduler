@@ -18,6 +18,7 @@ class Alarm(
     val hour: Int,
     val minute: Int,
     val title: String,
+    val appId: String,
     var created: Long,
     var isStarted: Boolean,
     val isRecurring: Boolean,
@@ -42,6 +43,7 @@ class Alarm(
         intent.putExtra(AlarmBroadcastReceiver.SATURDAY, isSaturday)
         intent.putExtra(AlarmBroadcastReceiver.SUNDAY, isSunday)
         intent.putExtra(AlarmBroadcastReceiver.TITLE, title)
+        intent.putExtra(AlarmBroadcastReceiver.APPID, appId)
         val alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0)
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()

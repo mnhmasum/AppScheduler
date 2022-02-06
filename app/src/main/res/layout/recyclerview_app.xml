@@ -35,7 +35,8 @@
                 android:onClick="@{()-> viewModel.selectApp(appItem)}"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="8dp"
-                android:text="@{appItem.appId}" />
+                android:text="@{appItem.appName}"
+                android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 

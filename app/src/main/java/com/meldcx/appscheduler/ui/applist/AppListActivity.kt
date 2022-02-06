@@ -29,6 +29,7 @@ class AppListActivity : BaseActivity<ActivityAppListBinding>() {
 
     override fun initComponents() {
         binding.apply {
+            toolbar.setNavigationOnClickListener { finish() }
             adapter = appListAdapter
         }
 
@@ -54,7 +55,8 @@ class AppListActivity : BaseActivity<ActivityAppListBinding>() {
 
     private fun showSelectedApp(it: AppItem) {
         val data = Intent()
-        data.putExtra("app_name", it.appLauncher)
+        data.putExtra("app_name", it.appName)
+        data.putExtra("app_id", it.appLauncher)
         setResult(Activity.RESULT_OK, data)
         finish()
     }
