@@ -165,7 +165,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{viewModel.errors.size()>0?"Validation error: Please select an App":""}'
+                android:text='@{viewModel.validationErrors.size()>0?"Validation error: Please select an App":""}'
                 android:textColor="@color/red"
                 app:layout_constraintBottom_toTopOf="@+id/fragment_createalarm_scheduleAlarm"
                 app:layout_constraintEnd_toEndOf="parent"

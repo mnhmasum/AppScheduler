@@ -9,7 +9,7 @@
 
         <variable
             name="adapter"
-            type="com.meldcx.appscheduler.ui.applist.AppListAdapter" />
+            type="com.meldcx.appscheduler.ui.selectapp.AppListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

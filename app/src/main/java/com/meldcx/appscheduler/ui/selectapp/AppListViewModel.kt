@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.applist
+package com.meldcx.appscheduler.ui.selectapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

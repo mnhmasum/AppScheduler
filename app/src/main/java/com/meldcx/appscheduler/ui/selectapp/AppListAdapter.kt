@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.applist
+package com.meldcx.appscheduler.ui.selectapp
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.ronnie.imageloaderdagger2.R
-import com.meldcx.appscheduler.data.Alarm
 import com.meldcx.appscheduler.data.AppItem
 import dev.ronnie.imageloaderdagger2.databinding.RecyclerviewAppBinding
 import java.util.*

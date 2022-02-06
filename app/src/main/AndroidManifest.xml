@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity" />
-        <activity android:name="com.meldcx.appscheduler.ui.applist.AppListActivity" />
+        <activity android:name="com.meldcx.appscheduler.ui.selectapp.AppListActivity" />
 
         <receiver android:name="com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver">
             <intent-filter>

@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.data.Alarm
 import com.meldcx.appscheduler.data.AppItem
-import com.meldcx.appscheduler.ui.applist.AppListAdapter
+import com.meldcx.appscheduler.ui.selectapp.AppListAdapter
 
 @BindingAdapter("setAdapter")
 fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?) {

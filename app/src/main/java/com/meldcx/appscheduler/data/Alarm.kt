@@ -4,12 +4,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
-import com.meldcx.appscheduler.utils.DayUtil
 import java.util.*
 
 @Entity(tableName = "alarm_table")
@@ -33,7 +30,7 @@ class Alarm(
     fun schedule(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)
-        intent.putExtra(AlarmBroadcastReceiver.ALARMID, alarmId)
+        intent.putExtra(AlarmBroadcastReceiver.ALARM_ID, alarmId)
         intent.putExtra(AlarmBroadcastReceiver.RECURRING, isRecurring)
         intent.putExtra(AlarmBroadcastReceiver.MONDAY, isMonday)
         intent.putExtra(AlarmBroadcastReceiver.TUESDAY, isTuesday)
@@ -43,7 +40,7 @@ class Alarm(
         intent.putExtra(AlarmBroadcastReceiver.SATURDAY, isSaturday)
         intent.putExtra(AlarmBroadcastReceiver.SUNDAY, isSunday)
         intent.putExtra(AlarmBroadcastReceiver.TITLE, title)
-        intent.putExtra(AlarmBroadcastReceiver.APPID, appId)
+        intent.putExtra(AlarmBroadcastReceiver.APP_ID, appId)
         val alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0)
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()

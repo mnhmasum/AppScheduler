@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.applist.AppListViewModel" />
+            type="com.meldcx.appscheduler.ui.selectapp.AppListViewModel" />
 
         <variable
             name="appItem"
@@ -13,7 +13,7 @@
 
         <variable
             name="adapter"
-            type="com.meldcx.appscheduler.ui.applist.AppListAdapter" />
+            type="com.meldcx.appscheduler.ui.selectapp.AppListAdapter" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -7,6 +7,7 @@ import android.os.Build
 import android.util.Log
 import com.meldcx.appscheduler.services.AlarmService
 import com.meldcx.appscheduler.services.RescheduleAlarmsService
+import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import java.util.*
 
 
@@ -44,15 +45,15 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
             Calendar.THURSDAY -> intent.getBooleanExtra(THURSDAY, false)
             Calendar.FRIDAY -> intent.getBooleanExtra(FRIDAY, false)
             Calendar.SATURDAY -> intent.getBooleanExtra(SATURDAY, false)
-            Calendar.SUNDAY ->  intent.getBooleanExtra(SUNDAY, false)
+            Calendar.SUNDAY -> intent.getBooleanExtra(SUNDAY, false)
             else -> false
         }
     }
 
     private fun startAlarmService(context: Context, intent: Intent) {
         val intentService = Intent(context, AlarmService::class.java)
-        intentService.putExtra(ALARMID, intent.getStringExtra(ALARMID))
-        intentService.putExtra(APPID, intent.getStringExtra(APPID))
+        intentService.putExtra(ALARM_ID, intent.getStringExtra(ALARM_ID))
+        intentService.putExtra(APP_ID, intent.getStringExtra(APP_ID))
         intentService.putExtra(TITLE, intent.getStringExtra(TITLE))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.stopService(intentService)
@@ -81,7 +82,6 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
         const val SUNDAY = "SUNDAY"
         const val RECURRING = "RECURRING"
         const val TITLE = "TITLE"
-        const val ALARMID = "ALARM_ID"
-        const val APPID = "app_id"
+        const val ALARM_ID = "ALARM_ID"
     }
 }

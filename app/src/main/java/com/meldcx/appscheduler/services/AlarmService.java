@@ -7,8 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import static com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver.APPID;
-import static com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver.TITLE;
+import static com.meldcx.appscheduler.utils.Constant.APP_ID;
 
 public class AlarmService extends Service {
 
@@ -19,9 +18,9 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String title = intent.getStringExtra(APPID);
+        String appId = intent.getStringExtra(APP_ID);
         PackageManager pm = getApplicationContext().getPackageManager();
-        Intent intentNew = pm.getLaunchIntentForPackage(title);
+        Intent intentNew = pm.getLaunchIntentForPackage(appId);
         intentNew.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             startActivity(intentNew);

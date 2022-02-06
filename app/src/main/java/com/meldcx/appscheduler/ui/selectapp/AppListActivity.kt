@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.applist
+package com.meldcx.appscheduler.ui.selectapp
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,8 @@ import com.meldcx.appscheduler.data.AppListIntent
 import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
+import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
+import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME
 import dev.ronnie.imageloaderdagger2.R
 import dev.ronnie.imageloaderdagger2.databinding.ActivityAppListBinding
 import kotlinx.android.synthetic.main.activity_app_list.*
@@ -55,8 +57,8 @@ class AppListActivity : BaseActivity<ActivityAppListBinding>() {
 
     private fun showSelectedApp(it: AppItem) {
         val data = Intent()
-        data.putExtra("app_name", it.appName)
-        data.putExtra("app_id", it.appLauncher)
+        data.putExtra(APP_NAME, it.appName)
+        data.putExtra(APP_ID, it.appLauncher)
         setResult(Activity.RESULT_OK, data)
         finish()
     }

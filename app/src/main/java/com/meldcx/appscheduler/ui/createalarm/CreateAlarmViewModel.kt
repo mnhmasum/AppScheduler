@@ -7,20 +7,19 @@ import com.meldcx.appscheduler.repository.AlarmRepository
 import com.meldcx.appscheduler.utils.Errors
 
 class CreateAlarmViewModel internal constructor(private val alarmRepository: AlarmRepository) : ViewModel() {
-    private val errorList = ArrayList<Errors>()
-    var errors = MutableLiveData<MutableList<Errors>>()
+    var validationErrors = MutableLiveData<MutableList<Errors>>()
 
     fun insert(alarm: Alarm?) {
         alarmRepository.insert(alarm)
     }
 
     fun isTaskValid(alarm: Alarm): Boolean {
-        errorList.clear()
+        val errorList = ArrayList<Errors>()
         if (alarm.appId.isEmpty()) {
             errorList.add(Errors.MISSING_APP)
-            errors.value = errorList
+            validationErrors.value = errorList
         }
-        return errors.value?.isEmpty()!!
+        return validationErrors.value?.isEmpty()!!
     }
 
 }
