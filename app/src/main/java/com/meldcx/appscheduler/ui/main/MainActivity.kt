@@ -5,8 +5,8 @@ import androidx.annotation.RequiresApi
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity
-import dev.ronnie.imageloaderdagger2.R
-import dev.ronnie.imageloaderdagger2.databinding.ActivityMainBinding
+import com.meldcx.appscheduler.R
+import com.meldcx.appscheduler.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 

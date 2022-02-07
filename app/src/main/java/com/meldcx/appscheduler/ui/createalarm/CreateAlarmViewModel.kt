@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.meldcx.appscheduler.data.Alarm
 import com.meldcx.appscheduler.repository.AlarmRepository
-import com.meldcx.appscheduler.utils.Errors
+import com.meldcx.appscheduler.utils.Constant.Errors
 
 class CreateAlarmViewModel internal constructor(private val repository: AlarmRepository) :
     ViewModel() {

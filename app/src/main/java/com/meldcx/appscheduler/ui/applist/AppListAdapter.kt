@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import dev.ronnie.imageloaderdagger2.R
+import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.AppItem
-import dev.ronnie.imageloaderdagger2.databinding.RecyclerviewAppBinding
+import com.meldcx.appscheduler.databinding.RecyclerviewAppBinding
 import java.util.*
 
 class AppListAdapter(private var appListViewModel: AppListViewModel) : RecyclerView.Adapter<AppListAdapter.AlarmViewHolder>() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.ronnie.imageloaderdagger2">
+    package="com.meldcx.appscheduler">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -18,23 +18,23 @@
         android:roundIcon="@drawable/ic_repeat_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppScheduler">
-        <activity android:name="com.meldcx.appscheduler.ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity" />
-        <activity android:name="com.meldcx.appscheduler.ui.applist.AppListActivity" />
+        <activity android:name=".ui.createalarm.CreateAlarmActivity" />
+        <activity android:name=".ui.applist.AppListActivity" />
 
-        <receiver android:name="com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver">
+        <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.meldcx.appscheduler.services.AlarmService" />
-        <service android:name="com.meldcx.appscheduler.services.RescheduleAlarmsService" />
+        <service android:name=".services.AlarmService" />
+        <service android:name=".services.RescheduleAlarmsService" />
     </application>
 
 </manifest>

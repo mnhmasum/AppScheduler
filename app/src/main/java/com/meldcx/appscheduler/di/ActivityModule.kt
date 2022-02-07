@@ -57,8 +57,4 @@ class ActivityModule(private val context: Context) {
         return AppListAdapter(alarmListViewModel)
     }
 
-    /*  @Provides
-      fun provideAppInfoNew(appInfo: AppInfo): AppInfoNew {
-          return AppInfoNew(appInfo)
-      }*/
 }

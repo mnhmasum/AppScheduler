@@ -11,8 +11,8 @@ import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME
 import com.meldcx.test.utils.buildTask
-import dev.ronnie.imageloaderdagger2.R
-import dev.ronnie.imageloaderdagger2.databinding.ActivityCreatealarmBinding
+import com.meldcx.appscheduler.R
+import com.meldcx.appscheduler.databinding.ActivityCreatealarmBinding
 import kotlinx.android.synthetic.main.activity_createalarm.*
 import java.util.*
 import javax.inject.Inject

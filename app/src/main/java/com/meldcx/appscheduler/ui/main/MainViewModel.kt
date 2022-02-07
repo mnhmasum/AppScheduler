@@ -16,7 +16,6 @@ class MainViewModel internal constructor(private val alarmRepository: AlarmRepos
     }
 
     fun delete(alarm: Alarm?) {
-        Log.d("DeleteTest==>", "delete: ")
         alarmRepository.delete(alarm)
     }
 }

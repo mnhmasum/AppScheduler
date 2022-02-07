@@ -15,9 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import dev.ronnie.imageloaderdagger2.R;
-
-import static com.meldcx.appscheduler.utils.Constant.APP_ID;
+import com.meldcx.appscheduler.R;
 
 public class AlarmService extends Service {
 
@@ -34,7 +32,7 @@ public class AlarmService extends Service {
         else
             startForeground(1, new Notification());
 
-        String appId = intent.getStringExtra(APP_ID);
+        String appId = intent.getStringExtra("APP_ID");
         PackageManager pm = getApplicationContext().getPackageManager();
         Intent intentNew = pm.getLaunchIntentForPackage(appId);
         intentNew.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -49,8 +47,8 @@ public class AlarmService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void startMyOwnForeground(){
-        String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
-        String channelName = "My Background Service";
+        String NOTIFICATION_CHANNEL_ID = "com.meldcx.appscheduler";
+        String channelName = "Meldcx Background Service";
         NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
         chan.setLightColor(Color.BLUE);
         chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);

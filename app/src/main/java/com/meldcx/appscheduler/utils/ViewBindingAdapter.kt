@@ -14,17 +14,10 @@ fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<Recycle
     }
 }
 
-@Suppress("UNCHECKED_CAST")
 @BindingAdapter("submitList")
 fun submitList(recyclerView: RecyclerView, alarms: List<Alarm>?) {
     val adapter = recyclerView.adapter as AlarmRecyclerViewAdapter?
     adapter?.setAlarms(alarms ?: listOf())
-}
-
-@BindingAdapter("submitAppList")
-fun submitAppList(recyclerView: RecyclerView, appItems: List<AppItem>?) {
-    val adapter = recyclerView.adapter as AppListAdapter?
-    adapter?.setApps(appItems ?: listOf())
 }
 
 @BindingAdapter("android:onLongClick")

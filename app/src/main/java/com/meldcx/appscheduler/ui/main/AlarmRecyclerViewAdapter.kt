@@ -5,39 +5,41 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import dev.ronnie.imageloaderdagger2.R
+import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.Alarm
-import dev.ronnie.imageloaderdagger2.databinding.RecyclerviewAlarmBinding
+import com.meldcx.appscheduler.databinding.RecyclerviewAlarmBinding
 import java.util.*
 
 class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
-    private var alarms: List<Alarm>
-    private lateinit var context: Context
+    private var mAlarmList: List<Alarm>
+    private lateinit var mContext: Context
 
     inner class AlarmViewHolder(val recyclerviewAlarmBinding: RecyclerviewAlarmBinding) :
         RecyclerView.ViewHolder(recyclerviewAlarmBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
         val binding = DataBindingUtil.inflate<RecyclerviewAlarmBinding>(LayoutInflater.from(parent.context), R.layout.recyclerview_alarm, parent, false)
-        binding.adapter = this
-        binding.viewModel = mainViewModel
-        this.context = parent.context
+        binding.apply {
+            adapter = this@AlarmRecyclerViewAdapter
+            viewModel = mainViewModel
+        }
+        this.mContext = parent.context
         return AlarmViewHolder(binding)
     }
 
     fun onToggle(alarm: Alarm, isChecked: Boolean) {
         if (isChecked) {
-            alarm.schedule(context)
+            alarm.schedule(mContext)
             mainViewModel.update(alarm)
         } else {
-            alarm.cancelAlarm(context)
+            alarm.cancelAlarm(mContext)
             mainViewModel.update(alarm)
         }
     }
 
     fun delete(alarm: Alarm) {
         mainViewModel.delete(alarm)
-        alarm.cancelAlarm(context)
+        alarm.cancelAlarm(mContext)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -45,19 +47,19 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
     }
 
     override fun onBindViewHolder(holder: AlarmViewHolder, position: Int) {
-        holder.recyclerviewAlarmBinding.alarm = alarms[position]
+        holder.recyclerviewAlarmBinding.alarm = mAlarmList[position]
     }
 
     override fun getItemCount(): Int {
-        return alarms.size
+        return mAlarmList.size
     }
 
     fun setAlarms(alarms: List<Alarm>) {
-        this.alarms = alarms
+        this.mAlarmList = alarms
         notifyDataSetChanged()
     }
 
     init {
-        alarms = ArrayList()
+        mAlarmList = ArrayList()
     }
 }

@@ -11,8 +11,8 @@ import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME
-import dev.ronnie.imageloaderdagger2.R
-import dev.ronnie.imageloaderdagger2.databinding.ActivityAppListBinding
+import com.meldcx.appscheduler.R
+import com.meldcx.appscheduler.databinding.ActivityAppListBinding
 import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
