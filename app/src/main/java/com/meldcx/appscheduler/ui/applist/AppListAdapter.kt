@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.selectapp
+package com.meldcx.appscheduler.ui.applist
 
 import android.content.Context
 import android.view.LayoutInflater

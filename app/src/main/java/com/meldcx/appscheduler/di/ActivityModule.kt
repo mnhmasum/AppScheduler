@@ -6,8 +6,8 @@ import dagger.Provides
 import com.meldcx.appscheduler.di.scope.PerActivity
 import com.meldcx.appscheduler.repository.AlarmRepository
 import com.meldcx.appscheduler.repository.AppListRepository
-import com.meldcx.appscheduler.ui.selectapp.AppListAdapter
-import com.meldcx.appscheduler.ui.selectapp.AppListViewModel
+import com.meldcx.appscheduler.ui.applist.AppListAdapter
+import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmViewModel
 import com.meldcx.appscheduler.ui.main.AlarmRecyclerViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel

@@ -80,7 +80,7 @@
                     android:textStyle="bold" />
 
                 <TimePicker
-                    android:id="@+id/fragment_createalarm_timePicker"
+                    android:id="@+id/time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"

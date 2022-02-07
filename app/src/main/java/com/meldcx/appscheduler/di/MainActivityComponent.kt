@@ -2,7 +2,7 @@ package com.meldcx.appscheduler.di
 
 import dagger.Component
 import com.meldcx.appscheduler.di.scope.PerActivity
-import com.meldcx.appscheduler.ui.selectapp.AppListActivity
+import com.meldcx.appscheduler.ui.applist.AppListActivity
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity
 import com.meldcx.appscheduler.ui.main.MainActivity
 

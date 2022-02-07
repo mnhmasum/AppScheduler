@@ -7,6 +7,8 @@ import android.content.Intent
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
+import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
+import java.io.Serializable
 import java.util.*
 
 @Entity(tableName = "alarm_table")
@@ -26,7 +28,7 @@ class Alarm(
     val isFriday: Boolean,
     val isSaturday: Boolean,
     val isSunday: Boolean
-) {
+) : Serializable {
     fun schedule(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)
@@ -40,7 +42,7 @@ class Alarm(
         intent.putExtra(AlarmBroadcastReceiver.SATURDAY, isSaturday)
         intent.putExtra(AlarmBroadcastReceiver.SUNDAY, isSunday)
         intent.putExtra(AlarmBroadcastReceiver.TITLE, title)
-        intent.putExtra(AlarmBroadcastReceiver.APP_ID, appId)
+        intent.putExtra(APP_ID, appId)
         val alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0)
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
@@ -54,10 +56,19 @@ class Alarm(
             calendar[Calendar.DAY_OF_MONTH] = calendar[Calendar.DAY_OF_MONTH] + 1
         }
         if (!isRecurring) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, alarmPendingIntent)
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmPendingIntent
+            )
         } else {
             val RUN_DAILY = (24 * 60 * 60 * 1000).toLong()
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, RUN_DAILY, alarmPendingIntent)
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                RUN_DAILY,
+                alarmPendingIntent
+            )
         }
         isStarted = true
     }

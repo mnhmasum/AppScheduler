@@ -1,19 +1,20 @@
 package com.meldcx.test.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.webkit.WebView
+import android.widget.TimePicker
 import android.widget.Toast
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
+import androidx.viewbinding.ViewBinding
+import com.meldcx.appscheduler.data.Alarm
+import com.meldcx.appscheduler.utils.TimePickerUtil
+import dev.ronnie.imageloaderdagger2.databinding.ActivityCreatealarmBinding
+import kotlinx.android.synthetic.main.activity_createalarm.*
 import java.util.*
 
+/*
 val Context.inputMethodManager: InputMethodManager
     get() = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -31,37 +32,33 @@ val View.layoutInflater: LayoutInflater
 
 fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =
     Toast.makeText(this, text, duration).show()
+*/
 
-fun Context.toast(resId: Int, duration: Int = Toast.LENGTH_SHORT) =
-    Toast.makeText(this, resId, duration).show()
-
-@Throws(Exception::class)
-suspend fun WebView.captureScreenshot(ioDispatcher: CoroutineDispatcher): Bitmap {
-    requestLayout()
-    val makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-    measure(makeMeasureSpec, makeMeasureSpec)
-    try {
-        return withContext(ioDispatcher) {
-            val config = Bitmap.Config.RGB_565
-            val screenBitmap: Bitmap? =
-                Bitmap.createBitmap(measuredWidth, measuredHeight, config)
-            if (screenBitmap != null) {
-                screenBitmap.setHasAlpha(false)
-                screenBitmap.prepareToDraw()
-                val canvas = Canvas(screenBitmap)
-                draw(canvas)
-                screenBitmap
-            } else throw  NullPointerException()
-        }
-    } catch (exception: Exception) {
-        throw  exception
+fun Context.getTaskHour(resId: TimePicker):Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        resId.getHour()
+    } else {
+        resId.getCurrentHour()
     }
+
+fun Context.buildTask(t:TimePicker, b: ActivityCreatealarmBinding, appId:String): Alarm {
+    return Alarm(
+        Random().nextInt(Int.MAX_VALUE),
+        getTaskHour(b.timePicker),
+        TimePickerUtil.getTimePickerMinute(b.timePicker),
+        b.textAppPackageName.text.toString(),
+        appId,
+        System.currentTimeMillis(),
+        true,
+        b.checkRecurring.isChecked,
+        b.checkMon.isChecked,
+        b.checkTue.isChecked,
+        b.checkWed.isChecked,
+        b.checkThu.isChecked,
+        b.checkFri.isChecked,
+        b.checkSat.isChecked,
+        b.checkSun.isChecked
+    )
 }
 
-fun generateImageFilename() = "${System.currentTimeMillis()}.jpeg"
 
-@SuppressLint("SimpleDateFormat")
-fun getCurrentDateTime(): String {
-    val dateFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss")
-    return dateFormat.format(Calendar.getInstance().time)
-}
+
