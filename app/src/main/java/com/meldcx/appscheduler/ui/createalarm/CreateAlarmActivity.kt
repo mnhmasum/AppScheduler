@@ -38,8 +38,8 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
         }
     }
 
-    fun createAlarm() {
-        val task = buildTask(time_picker, binding, mAppId)
+    fun onClickCreateTask() {
+        val task = buildTask(binding, mAppId)
         if (createTaskViewModel.isTaskValid(task)) {
             createTaskViewModel.insert(task)
             task.scheduleAndClose()

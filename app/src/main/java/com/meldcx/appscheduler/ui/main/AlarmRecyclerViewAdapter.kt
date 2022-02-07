@@ -20,6 +20,7 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
         val binding = DataBindingUtil.inflate<RecyclerviewAlarmBinding>(LayoutInflater.from(parent.context), R.layout.recyclerview_alarm, parent, false)
         binding.adapter = this
+        binding.viewModel = mainViewModel
         this.context = parent.context
         return AlarmViewHolder(binding)
     }
@@ -32,6 +33,11 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
             alarm.cancelAlarm(context)
             mainViewModel.update(alarm)
         }
+    }
+
+    fun delete(alarm: Alarm) {
+        mainViewModel.delete(alarm)
+        alarm.cancelAlarm(context)
     }
 
     override fun getItemViewType(position: Int): Int {

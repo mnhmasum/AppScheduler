@@ -22,4 +22,5 @@ public final class DayUtil {
         }
         throw new Exception("Could not locate day");
     }
+
 }

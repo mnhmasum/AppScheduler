@@ -2,16 +2,9 @@ package com.meldcx.test.utils
 
 import android.content.Context
 import android.os.Build
-import android.view.LayoutInflater
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.TimePicker
-import android.widget.Toast
-import androidx.viewbinding.ViewBinding
 import com.meldcx.appscheduler.data.Alarm
-import com.meldcx.appscheduler.utils.TimePickerUtil
 import dev.ronnie.imageloaderdagger2.databinding.ActivityCreatealarmBinding
-import kotlinx.android.synthetic.main.activity_createalarm.*
 import java.util.*
 
 /*
@@ -34,29 +27,35 @@ fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =
     Toast.makeText(this, text, duration).show()
 */
 
-fun Context.getTaskHour(resId: TimePicker):Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+fun getTimePickerHour(resId: TimePicker):Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         resId.getHour()
     } else {
         resId.getCurrentHour()
     }
 
-fun Context.buildTask(t:TimePicker, b: ActivityCreatealarmBinding, appId:String): Alarm {
+fun getTimePickerMinute(resId: TimePicker):Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    resId.minute
+} else {
+    resId.currentMinute
+}
+
+fun Context.buildTask(binding: ActivityCreatealarmBinding, appId:String): Alarm {
     return Alarm(
         Random().nextInt(Int.MAX_VALUE),
-        getTaskHour(b.timePicker),
-        TimePickerUtil.getTimePickerMinute(b.timePicker),
-        b.textAppPackageName.text.toString(),
+        getTimePickerHour(binding.timePicker),
+        getTimePickerMinute(binding.timePicker),
+        binding.textAppPackageName.text.toString(),
         appId,
         System.currentTimeMillis(),
         true,
-        b.checkRecurring.isChecked,
-        b.checkMon.isChecked,
-        b.checkTue.isChecked,
-        b.checkWed.isChecked,
-        b.checkThu.isChecked,
-        b.checkFri.isChecked,
-        b.checkSat.isChecked,
-        b.checkSun.isChecked
+        binding.checkRecurring.isChecked,
+        binding.checkMon.isChecked,
+        binding.checkTue.isChecked,
+        binding.checkWed.isChecked,
+        binding.checkThu.isChecked,
+        binding.checkFri.isChecked,
+        binding.checkSat.isChecked,
+        binding.checkSun.isChecked
     )
 }
 

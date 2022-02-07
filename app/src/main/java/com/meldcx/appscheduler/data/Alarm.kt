@@ -81,4 +81,33 @@ class Alarm(
         isStarted = false
     }
 
+    fun getRecurringDaysText(): String? {
+        if (!isRecurring) {
+            return null
+        }
+        var days = ""
+        if (isMonday) {
+            days += "Mo "
+        }
+        if (isTuesday) {
+            days += "Tu "
+        }
+        if (isWednesday) {
+            days += "We "
+        }
+        if (isThursday) {
+            days += "Th "
+        }
+        if (isFriday) {
+            days += "Fr "
+        }
+        if (isSaturday) {
+            days += "Sa "
+        }
+        if (isSunday) {
+            days += "Su "
+        }
+        return days
+    }
+
 }

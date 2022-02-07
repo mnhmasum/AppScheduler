@@ -18,4 +18,8 @@ class AlarmRepository() {
         databaseWriteExecutor.execute { alarmDao.update(alarm) }
     }
 
+    fun delete(alarm: Alarm?) {
+        databaseWriteExecutor.execute { alarmDao.delete(alarm) }
+    }
+
 }
