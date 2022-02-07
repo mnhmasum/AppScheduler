@@ -7,7 +7,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.meldcx.appscheduler.utils.Errors" />
+        <import type="com.meldcx.appscheduler.utils.Constant.Errors" />
 
         <variable
             name="viewModel"
