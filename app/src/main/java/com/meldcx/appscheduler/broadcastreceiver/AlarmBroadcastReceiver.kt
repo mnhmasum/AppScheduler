@@ -5,23 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.meldcx.appscheduler.services.RescheduleAlarmsService
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import java.util.*
 
 
 class AlarmBroadcastReceiver : BroadcastReceiver() {
-   lateinit var context:Context
+    lateinit var context: Context
     override fun onReceive(context: Context, intent: Intent) {
         this.context = context
-        val bundle = intent.extras
-        if (bundle != null) {
-            for (key in bundle.keySet()) {
-                Log.e("Boradcast", key + " : " + if (bundle[key] != null) bundle[key] else "NULL")
-            }
-        }
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
             startRescheduleAlarmsService(context)
         } else {
@@ -54,25 +46,6 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
     }
 
     private fun startAlarmService(context: Context, intent: Intent) {
-        /*val intentService = Intent(context, AlarmService::class.java)
-        intentService.putExtra(ALARM_ID, intent.getStringExtra(ALARM_ID))
-        intentService.putExtra(APP_ID, intent.getStringExtra(APP_ID))
-        intentService.putExtra(TITLE, intent.getStringExtra(TITLE))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //context.stopService(intentService)
-            GlobalScope.launch(Dispatchers.Default) {
-                delay(1000)
-                //context.startForegroundService(intentService)
-                ContextCompat.startForegroundService(context, intentService)
-            }
-
-        } else {
-            //context.stopService(intentService)
-            GlobalScope.launch(Dispatchers.Default) {
-                delay(1000)
-                context.startService(intentService)
-            }
-        }*/
         val appId = intent.getStringExtra(APP_ID)
         val pm: PackageManager = context.getPackageManager()
         val intentNew = pm.getLaunchIntentForPackage(appId!!)
