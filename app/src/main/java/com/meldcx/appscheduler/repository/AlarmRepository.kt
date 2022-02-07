@@ -6,8 +6,8 @@ import com.meldcx.appscheduler.application.MainApplication.Companion.databaseWri
 import com.meldcx.appscheduler.data.Alarm
 import com.meldcx.appscheduler.data.AlarmDao
 
-class AlarmRepository() {
-    private val alarmDao: AlarmDao = MainApplication.appDatabase.alarmDao()
+class AlarmRepository constructor(private val alarmDao: AlarmDao) {
+    //private val alarmDao: AlarmDao = MainApplication.appDatabase.alarmDao()
     val alarmsLiveData: LiveData<List<Alarm>> = alarmDao.alarms
 
     fun insert(alarm: Alarm?) {

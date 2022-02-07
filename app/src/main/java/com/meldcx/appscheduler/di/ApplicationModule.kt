@@ -2,6 +2,7 @@ package com.meldcx.appscheduler.di
 
 import android.app.Application
 import androidx.room.Room
+import com.meldcx.appscheduler.data.AlarmDao
 import dagger.Module
 import dagger.Provides
 import com.meldcx.appscheduler.data.AppDatabase
@@ -24,8 +25,14 @@ class ApplicationModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
+    fun provideAlarmDao(appDatabase: AppDatabase): AlarmDao {
+        return appDatabase.alarmDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideApplication(): Application {
         return mApplication
     }
-    
+
 }
