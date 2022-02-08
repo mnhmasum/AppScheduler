@@ -8,7 +8,7 @@
 
         <variable
             name="alarm"
-            type="com.meldcx.appscheduler.data.Alarm" />
+            type="com.meldcx.appscheduler.data.Schedule" />
 
         <variable
             name="adapter"

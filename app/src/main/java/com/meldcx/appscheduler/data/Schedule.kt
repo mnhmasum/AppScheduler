@@ -8,11 +8,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
-import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "alarm_table")
-class Alarm(
+@Entity(tableName = "schedule_table")
+class Schedule(
     @field:PrimaryKey var alarmId: Int,
     val hour: Int,
     val minute: Int,
@@ -28,7 +27,7 @@ class Alarm(
     val isFriday: Boolean,
     val isSaturday: Boolean,
     val isSunday: Boolean
-) : Serializable {
+) {
     fun schedule(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)

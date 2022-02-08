@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import com.meldcx.appscheduler.data.Alarm
+import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.applist.AppListActivity
 import com.meldcx.appscheduler.ui.base.BaseActivity
@@ -46,7 +46,7 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
         }
     }
 
-    private fun Alarm.scheduleAndClose() {
+    private fun Schedule.scheduleAndClose() {
         this.schedule(this@CreateAlarmActivity)
         finish()
     }

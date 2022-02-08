@@ -3,7 +3,7 @@ package com.meldcx.test.utils
 import android.content.Context
 import android.os.Build
 import android.widget.TimePicker
-import com.meldcx.appscheduler.data.Alarm
+import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.ActivityCreatealarmBinding
 import java.util.*
 
@@ -19,8 +19,8 @@ fun getTimePickerMinute(resId: TimePicker):Int = if (Build.VERSION.SDK_INT >= Bu
     resId.currentMinute
 }
 
-fun Context.buildTask(binding: ActivityCreatealarmBinding, appId:String): Alarm {
-    return Alarm(
+fun Context.buildTask(binding: ActivityCreatealarmBinding, appId:String): Schedule {
+    return Schedule(
         Random().nextInt(Int.MAX_VALUE),
         getTimePickerHour(binding.timePicker),
         getTimePickerMinute(binding.timePicker),

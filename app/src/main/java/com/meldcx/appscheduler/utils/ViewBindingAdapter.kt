@@ -3,9 +3,7 @@ package com.meldcx.appscheduler.ui.main
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.meldcx.appscheduler.data.Alarm
-import com.meldcx.appscheduler.data.AppItem
-import com.meldcx.appscheduler.ui.applist.AppListAdapter
+import com.meldcx.appscheduler.data.Schedule
 
 @BindingAdapter("setAdapter")
 fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?) {
@@ -15,9 +13,9 @@ fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<Recycle
 }
 
 @BindingAdapter("submitList")
-fun submitList(recyclerView: RecyclerView, alarms: List<Alarm>?) {
+fun submitList(recyclerView: RecyclerView, schedules: List<Schedule>?) {
     val adapter = recyclerView.adapter as AlarmRecyclerViewAdapter?
-    adapter?.setAlarms(alarms ?: listOf())
+    adapter?.setAlarms(schedules ?: listOf())
 }
 
 @BindingAdapter("android:onLongClick")

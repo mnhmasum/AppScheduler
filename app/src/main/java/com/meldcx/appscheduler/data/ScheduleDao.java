@@ -10,19 +10,19 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface AlarmDao {
+public interface ScheduleDao {
     @Insert
-    void insert(Alarm alarm);
+    void insert(Schedule alarm);
 
-    @Query("DELETE FROM alarm_table")
+    @Query("DELETE FROM schedule_table")
     void deleteAll();
 
-    @Query("SELECT * FROM alarm_table ORDER BY created ASC")
-    LiveData<List<Alarm>> getAlarms();
+    @Query("SELECT * FROM schedule_table ORDER BY created ASC")
+    LiveData<List<Schedule>> getAlarms();
 
     @Update
-    void update(Alarm alarm);
+    void update(Schedule alarm);
 
     @Delete
-    void delete(Alarm alarm);
+    void delete(Schedule alarm);
 }

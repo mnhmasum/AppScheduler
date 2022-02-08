@@ -1,21 +1,26 @@
 package com.meldcx.appscheduler.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.meldcx.appscheduler.data.Alarm
-import com.meldcx.appscheduler.repository.AlarmRepository
+import androidx.lifecycle.viewModelScope
+import com.meldcx.appscheduler.data.Schedule
+import com.meldcx.appscheduler.repository.ScheduleRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel internal constructor(private val alarmRepository: AlarmRepository) :
+class MainViewModel internal constructor(private val scheduleRepository: ScheduleRepository) :
     ViewModel() {
-    var alarmsLiveData: LiveData<List<Alarm>> = alarmRepository.alarmsLiveData
+    var alarmsLiveData: LiveData<List<Schedule>> = scheduleRepository.alarmsLiveData
 
-    fun update(alarm: Alarm?) {
-        alarmRepository.update(alarm)
+    fun update(schedule: Schedule) {
+        viewModelScope.launch(Dispatchers.IO) {
+            scheduleRepository.update(schedule)
+        }
     }
 
-    fun delete(alarm: Alarm?) {
-        alarmRepository.delete(alarm)
+    fun delete(schedule: Schedule) {
+        viewModelScope.launch(Dispatchers.IO) {
+            scheduleRepository.delete(schedule)
+        }
     }
 }

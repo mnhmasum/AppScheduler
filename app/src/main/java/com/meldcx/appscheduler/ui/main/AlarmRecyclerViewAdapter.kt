@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.R
-import com.meldcx.appscheduler.data.Alarm
+import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.RecyclerviewAlarmBinding
 import java.util.*
 
 class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
-    private var mAlarmList: List<Alarm>
+    private var mScheduleList: List<Schedule>
     private lateinit var mContext: Context
 
     inner class AlarmViewHolder(val recyclerviewAlarmBinding: RecyclerviewAlarmBinding) :
@@ -27,19 +27,19 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
         return AlarmViewHolder(binding)
     }
 
-    fun onToggle(alarm: Alarm, isChecked: Boolean) {
+    fun onToggle(schedule: Schedule, isChecked: Boolean) {
         if (isChecked) {
-            alarm.schedule(mContext)
-            mainViewModel.update(alarm)
+            schedule.schedule(mContext)
+            mainViewModel.update(schedule)
         } else {
-            alarm.cancelAlarm(mContext)
-            mainViewModel.update(alarm)
+            schedule.cancelAlarm(mContext)
+            mainViewModel.update(schedule)
         }
     }
 
-    fun delete(alarm: Alarm) {
-        mainViewModel.delete(alarm)
-        alarm.cancelAlarm(mContext)
+    fun delete(schedule: Schedule) {
+        mainViewModel.delete(schedule)
+        schedule.cancelAlarm(mContext)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -47,19 +47,19 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
     }
 
     override fun onBindViewHolder(holder: AlarmViewHolder, position: Int) {
-        holder.recyclerviewAlarmBinding.alarm = mAlarmList[position]
+        holder.recyclerviewAlarmBinding.alarm = mScheduleList[position]
     }
 
     override fun getItemCount(): Int {
-        return mAlarmList.size
+        return mScheduleList.size
     }
 
-    fun setAlarms(alarms: List<Alarm>) {
-        this.mAlarmList = alarms
+    fun setAlarms(schedules: List<Schedule>) {
+        this.mScheduleList = schedules
         notifyDataSetChanged()
     }
 
     init {
-        mAlarmList = ArrayList()
+        mScheduleList = ArrayList()
     }
 }
