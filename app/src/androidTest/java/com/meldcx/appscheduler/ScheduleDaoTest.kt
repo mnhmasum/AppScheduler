@@ -14,7 +14,7 @@ import org.hamcrest.CoreMatchers.`is` as Is
 
 
 @RunWith(AndroidJUnit4::class)
-class TaskDaoTest {
+class ScheduleDaoTest {
     private var taskDatabase: AppDatabase? = null
 
     @Before
@@ -58,7 +58,7 @@ class TaskDaoTest {
        )
        taskDatabase!!.alarmDao().insert(entity)
        val taskList = LiveDataTestUtil.getValue(taskDatabase!!.alarmDao().alarms)
-       assertThat(taskList[0].alarmId, Is(124))
+       assertThat(taskList[0].alarmId, Is(123))
        assertThat(taskList.size, Is(1))
     }
 

@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class LiveDataTestUtil {
+public class LiveDataUtil {
     public static <T> T getValue(final LiveData<T> liveData) throws InterruptedException {
         final Object[] data = new Object[1];
         final CountDownLatch latch = new CountDownLatch(1);
@@ -22,9 +22,7 @@ public class LiveDataTestUtil {
                 liveData.removeObserver(this);
             }
         };
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> liveData.observeForever(observer));
+        liveData.observeForever(observer);
         latch.await(2, TimeUnit.SECONDS);
         //noinspection unchecked
         return (T) data[0];

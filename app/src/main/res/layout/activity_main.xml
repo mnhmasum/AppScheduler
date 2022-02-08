@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_bias="1.0"
             app:setAdapter="@{adapter}"
-            app:submitList="@{viewModel.alarmsLiveData}" />
+            app:submitList="@{viewModel.scheduleLiveData}" />
 
         <Button
             android:id="@+id/buttonAddAlarm"
