@@ -1,10 +1,11 @@
 package com.meldcx.appscheduler.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.google.common.truth.Truth.assertThat
 import com.meldcx.appscheduler.LiveDataUtil
 import com.meldcx.appscheduler.MainCoroutineRule
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.repo.FakeArtRepository
+import com.meldcx.appscheduler.repo.FakeScheduleRepository
 import com.meldcx.appscheduler.ui.main.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert
@@ -25,53 +26,55 @@ class MainViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = MainViewModel(FakeArtRepository())
+        viewModel = MainViewModel(FakeScheduleRepository())
     }
 
     @Test
-    fun `insert art without year returns error`() {
-        val entity = Schedule(
-            123,
-            1,
-            1,
-            "Test",
-            "com.test.app",
-            1L,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        )
-        viewModel.insert(entity)
-        entity.alarmId = 128
-        viewModel.update(entity)
-
+    fun `insert schedule test`() {
+        val schedule = schedule()
+        viewModel.insert(schedule)
+        Thread.sleep(1000)
         val value = LiveDataUtil.getValue(viewModel.scheduleLiveData)
-        Assert.assertEquals(value[0].alarmId, 125)
+        Assert.assertEquals(value?.size, 1)
+        assertThat(value).contains(schedule)
+    }
+
+    @Test
+    fun `update schedule test`() {
+        val schedule = schedule()
+        viewModel.insert(schedule)
+        schedule.alarmId = 100
+        viewModel.update(schedule)
+        val value = LiveDataUtil.getValue(viewModel.scheduleLiveData)
+        Assert.assertEquals(value?.get(0)!!.alarmId, 100)
         Assert.assertEquals(value.isEmpty(), false)
-    }
 
-
-    @Test
-    fun `insert art without name returns error`() {
-        //viewModel.makeArt("","Da Vinci","1500")
-
-        //val value = viewModel.insertArtMessage.getOrAwaitValueTest()
-
-        //assertThat(value.status).isEqualTo(Status.ERROR)
     }
 
     @Test
-    fun `insert art without artistName returns error`() {
-        //viewModel.makeArt("Mona Lisa","","1500")
-
-        //val value = viewModel.insertArtMessage.getOrAwaitValueTest()
-
-        //assertThat(value.status).isEqualTo(Status.ERROR)
+    fun `delete schedule test`() {
+        val schedule = schedule()
+        viewModel.insert(schedule)
+        viewModel.delete(schedule)
+        val value = LiveDataUtil.getValue(viewModel.scheduleLiveData)
+        Assert.assertEquals(value?.size, 0)
     }
+
+    fun schedule() = Schedule(
+        123,
+        1,
+        1,
+        "Test",
+        "com.test.app",
+        1L,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    )
 }

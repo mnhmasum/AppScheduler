@@ -4,12 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.repository.ScheduleRepository
+import com.meldcx.appscheduler.repository.CreateTaskRepositoryInterface
 import com.meldcx.appscheduler.utils.Constant.Errors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateAlarmViewModel internal constructor(private val repository: ScheduleRepository) :
+class CreateScheduleViewModel internal constructor(private val repository: CreateTaskRepositoryInterface) :
     ViewModel() {
     private val errorList = ArrayList<Errors>()
     var validationErrors = MutableLiveData<MutableList<Errors>>()

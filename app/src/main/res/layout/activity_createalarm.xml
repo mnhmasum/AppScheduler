@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.createalarm.CreateAlarmViewModel" />
+            type="com.meldcx.appscheduler.ui.createalarm.CreateScheduleViewModel" />
 
         <variable
             name="activity"

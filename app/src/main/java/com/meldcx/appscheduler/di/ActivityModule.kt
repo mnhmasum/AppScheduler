@@ -7,9 +7,10 @@ import dagger.Provides
 import com.meldcx.appscheduler.di.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
+import com.meldcx.appscheduler.repository.CreateTaskRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
-import com.meldcx.appscheduler.ui.createalarm.CreateAlarmViewModel
+import com.meldcx.appscheduler.ui.createalarm.CreateScheduleViewModel
 import com.meldcx.appscheduler.ui.main.AlarmRecyclerViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel
 
@@ -25,6 +26,11 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
+    fun provideCreateTaskRepository(alarmDao: ScheduleDao): CreateTaskRepository {
+        return CreateTaskRepository(alarmDao)
+    }
+
+    @Provides
     fun provideAppListRepository(): AppListRepository {
         return AppListRepository(context.packageManager)
     }
@@ -37,8 +43,8 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideCreateAlarmViewModel(scheduleRepository: ScheduleRepository): CreateAlarmViewModel {
-        return CreateAlarmViewModel(scheduleRepository)
+    fun provideCreateAlarmViewModel(createTaskRepository: CreateTaskRepository): CreateScheduleViewModel {
+        return CreateScheduleViewModel(createTaskRepository)
     }
 
     @Provides

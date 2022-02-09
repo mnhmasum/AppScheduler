@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
     @Inject
-    lateinit var createTaskViewModel: CreateAlarmViewModel
+    lateinit var createTaskViewModel: CreateScheduleViewModel
     private var mAppId: String = String()
 
     override fun performDependencyInjection(activityComponent: MainActivityComponent) {
@@ -55,7 +55,8 @@ class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {
         startForResult.launch(Intent(this, AppListActivity::class.java))
     }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 binding.textAppPackageName.text = result.data?.getStringExtra(APP_NAME)
                 mAppId = result.data?.getStringExtra(APP_ID)!!
