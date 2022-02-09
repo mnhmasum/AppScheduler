@@ -1,9 +1,10 @@
-package com.meldcx.appscheduler.ui.main
+package com.meldcx.appscheduler.utils
 
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.data.Schedule
+import com.meldcx.appscheduler.ui.main.MainViewAdapter
 
 @BindingAdapter("setAdapter")
 fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>?) {

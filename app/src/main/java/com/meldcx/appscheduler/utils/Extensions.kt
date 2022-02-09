@@ -1,4 +1,4 @@
-package com.meldcx.test.utils
+package com.meldcx.appscheduler.utils
 
 import android.content.Context
 import android.os.Build
