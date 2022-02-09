@@ -22,7 +22,7 @@ navigation between fragments
 
 
 ## Screenshots
-|<img src="screenshots/home.png" width=200/>|<img src="screenshots/create.jpg" width=200/>|<img src="screenshots/select.png" width=200/>|
+|<img src="screenshots/home.png" width=200/>|<img src="screenshots/create.png" width=200/>|<img src="screenshots/select.png" width=200/>|
 |:----:|:----:|:----:|
 
 ## Demo
