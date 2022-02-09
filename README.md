@@ -28,6 +28,7 @@ navigation between fragments
 |:----:|:----:|:----:|
 
 ## Demo
-<img src="demo/demo.gif" width=300/>
+|<img src="demo/demo.gif" width=300/>|
+|:----:|
 =======
 # AppScheduler
