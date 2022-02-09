@@ -1,6 +1,6 @@
 # App Scheduler
 
-The App uses a set of Android Jetpack libraries and uses Dagger2 library for dependency injection. The App uses Kotlin.
+This project uses a set of Android Jetpack libraries, Uses Dagger2 library for dependency injection and JUnit for unit testing. The App uses Kotlin.
 
 ### Note
 After installing the app you must give the "Display over other apps" permission
