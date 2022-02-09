@@ -1,6 +1,6 @@
 # Images
 
-The App uses a set of Android Jetpack libraries plus Retrofit to dispay data from REST API(Unsplash). The App uses Kotlin.
+The App uses a set of Android Jetpack libraries plus  to dispay data from REST API(Unsplash). The App uses Kotlin.
 
 ### Prerequisites
 
@@ -22,8 +22,8 @@ navigation between fragments
 
 
 ## Screenshots
-|<img src="screenshots/home.jpg" width=200/>|<img src="screenshots/detail.jpg" width=200/>|<img src="screenshots/home_dark.jpg" width=200/>|<img src="screenshots/search.jpg" width=200/>|
-|:----:|:----:|:----:|:----:|
+|<img src="screenshots/home.png" width=200/>|<img src="screenshots/create.jpg" width=200/>|<img src="screenshots/select.png" width=200/>|
+|:----:|:----:|:----:|
 
 ## Demo
 <img src="demo/demo.gif" width=300/>

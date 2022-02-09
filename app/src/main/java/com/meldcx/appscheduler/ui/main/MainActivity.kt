@@ -2,7 +2,7 @@ package com.meldcx.appscheduler.ui.main
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.meldcx.appscheduler.di.MainActivityComponent
+import com.meldcx.appscheduler.dependencytinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity
 import com.meldcx.appscheduler.R
@@ -16,7 +16,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     lateinit var mainViewModel: MainViewModel
 
     @Inject
-    lateinit var alarmRecyclerViewAdapter: AlarmRecyclerViewAdapter
+    lateinit var mainViewAdapter: MainViewAdapter
 
     override fun performDependencyInjection(activityComponent: MainActivityComponent) {
         activityComponent.inject(this)
@@ -30,7 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initComponents() {
         binding.apply {
             viewModel = mainViewModel
-            adapter = alarmRecyclerViewAdapter
+            adapter = mainViewAdapter
             activity = this@MainActivity
         }
     }

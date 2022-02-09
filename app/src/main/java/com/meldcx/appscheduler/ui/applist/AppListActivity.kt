@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.meldcx.appscheduler.data.AppItem
 import com.meldcx.appscheduler.data.AppListIntent
 import com.meldcx.appscheduler.data.AppState
-import com.meldcx.appscheduler.di.MainActivityComponent
+import com.meldcx.appscheduler.dependencytinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME

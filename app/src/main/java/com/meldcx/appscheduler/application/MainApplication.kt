@@ -2,18 +2,15 @@ package com.meldcx.appscheduler.application
 
 import android.app.Application
 import com.meldcx.appscheduler.data.AppDatabase
-import com.meldcx.appscheduler.di.ApplicationComponent
-import com.meldcx.appscheduler.di.ApplicationModule
-import com.meldcx.appscheduler.di.DaggerApplicationComponent
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import com.meldcx.appscheduler.dependencytinjection.ApplicationComponent
+import com.meldcx.appscheduler.dependencytinjection.ApplicationModule
+import com.meldcx.appscheduler.dependencytinjection.DaggerApplicationComponent
 import javax.inject.Inject
 
 class MainApplication : Application() {
 
     companion object {
         lateinit var appDatabase: AppDatabase
-        val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(4)
     }
 
     @Inject

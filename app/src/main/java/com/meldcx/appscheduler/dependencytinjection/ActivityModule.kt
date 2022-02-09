@@ -1,21 +1,21 @@
-package com.meldcx.appscheduler.di
+package com.meldcx.appscheduler.dependencytinjection
 
 import android.content.Context
 import com.meldcx.appscheduler.data.ScheduleDao
 import dagger.Module
 import dagger.Provides
-import com.meldcx.appscheduler.di.scope.PerActivity
+import com.meldcx.appscheduler.dependencytinjection.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.createalarm.CreateScheduleViewModel
-import com.meldcx.appscheduler.ui.main.AlarmRecyclerViewAdapter
+import com.meldcx.appscheduler.ui.main.MainViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel
 
 /**
- * Created by nazmul 02/08/2021.
+ * Created by nazmul 01/22/2022.
  */
 @Module
 class ActivityModule(private val context: Context) {
@@ -55,8 +55,8 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideAlarmRecyclerViewAdapter(alarmListViewModel: MainViewModel): AlarmRecyclerViewAdapter {
-        return AlarmRecyclerViewAdapter(alarmListViewModel)
+    fun provideAlarmRecyclerViewAdapter(alarmListViewModel: MainViewModel): MainViewAdapter {
+        return MainViewAdapter(alarmListViewModel)
     }
 
     @Provides

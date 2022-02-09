@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.di
+package com.meldcx.appscheduler.dependencytinjection
 
 import dagger.Component
 import com.meldcx.appscheduler.application.MainApplication

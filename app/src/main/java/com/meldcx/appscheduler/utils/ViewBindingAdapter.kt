@@ -14,7 +14,7 @@ fun setAdapter(recyclerView: RecyclerView, adapter: RecyclerView.Adapter<Recycle
 
 @BindingAdapter("submitList")
 fun submitList(recyclerView: RecyclerView, schedules: List<Schedule>?) {
-    val adapter = recyclerView.adapter as AlarmRecyclerViewAdapter?
+    val adapter = recyclerView.adapter as MainViewAdapter?
     adapter?.setAlarms(schedules ?: listOf())
 }
 

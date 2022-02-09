@@ -10,7 +10,7 @@ import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.RecyclerviewAlarmBinding
 import java.util.*
 
-class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
+class MainViewAdapter(private var mainViewModel: MainViewModel) : RecyclerView.Adapter<MainViewAdapter.AlarmViewHolder>() {
     private var mScheduleList: List<Schedule>
     private lateinit var mContext: Context
 
@@ -20,7 +20,7 @@ class AlarmRecyclerViewAdapter(private var mainViewModel: MainViewModel) : Recyc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
         val binding = DataBindingUtil.inflate<RecyclerviewAlarmBinding>(LayoutInflater.from(parent.context), R.layout.recyclerview_alarm, parent, false)
         binding.apply {
-            adapter = this@AlarmRecyclerViewAdapter
+            adapter = this@MainViewAdapter
             viewModel = mainViewModel
         }
         this.mContext = parent.context

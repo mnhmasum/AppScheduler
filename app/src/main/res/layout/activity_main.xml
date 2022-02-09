@@ -10,7 +10,7 @@
 
         <variable
             name="adapter"
-            type="com.meldcx.appscheduler.ui.main.AlarmRecyclerViewAdapter" />
+            type="com.meldcx.appscheduler.ui.main.MainViewAdapter" />
 
         <variable
             name="activity"
