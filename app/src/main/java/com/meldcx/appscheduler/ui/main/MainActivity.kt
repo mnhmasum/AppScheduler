@@ -2,7 +2,7 @@ package com.meldcx.appscheduler.ui.main
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.meldcx.appscheduler.dependencytinjection.MainActivityComponent
+import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity
 import com.meldcx.appscheduler.R

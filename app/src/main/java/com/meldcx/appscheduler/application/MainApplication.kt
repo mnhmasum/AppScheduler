@@ -2,9 +2,9 @@ package com.meldcx.appscheduler.application
 
 import android.app.Application
 import com.meldcx.appscheduler.data.AppDatabase
-import com.meldcx.appscheduler.dependencytinjection.ApplicationComponent
-import com.meldcx.appscheduler.dependencytinjection.ApplicationModule
-import com.meldcx.appscheduler.dependencytinjection.DaggerApplicationComponent
+import com.meldcx.appscheduler.dependencyinjection.ApplicationComponent
+import com.meldcx.appscheduler.dependencyinjection.ApplicationModule
+import com.meldcx.appscheduler.dependencyinjection.DaggerApplicationComponent
 import javax.inject.Inject
 
 class MainApplication : Application() {

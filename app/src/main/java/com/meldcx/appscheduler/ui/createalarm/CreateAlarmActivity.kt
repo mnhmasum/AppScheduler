@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.dependencytinjection.MainActivityComponent
+import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.applist.AppListActivity
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID

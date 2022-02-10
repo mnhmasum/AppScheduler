@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.dependencytinjection.qualifier
+package com.meldcx.appscheduler.dependencyinjection.qualifier
 
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy

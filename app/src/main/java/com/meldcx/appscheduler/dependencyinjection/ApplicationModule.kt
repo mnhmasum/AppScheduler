@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.dependencytinjection
+package com.meldcx.appscheduler.dependencyinjection
 
 import android.app.Application
 import androidx.room.Room
@@ -6,7 +6,7 @@ import com.meldcx.appscheduler.data.ScheduleDao
 import dagger.Module
 import dagger.Provides
 import com.meldcx.appscheduler.data.AppDatabase
-import com.meldcx.appscheduler.dependencytinjection.qualifier.DatabaseName
+import com.meldcx.appscheduler.dependencyinjection.qualifier.DatabaseName
 import javax.inject.Singleton
 
 @Module
