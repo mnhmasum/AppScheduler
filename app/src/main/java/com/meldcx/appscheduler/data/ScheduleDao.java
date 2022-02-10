@@ -18,11 +18,11 @@ public interface ScheduleDao {
     void deleteAll();
 
     @Query("SELECT * FROM schedule_table ORDER BY created ASC")
-    LiveData<List<Schedule>> getAlarms();
+    LiveData<List<Schedule>> getSchedules();
 
     @Update
-    void update(Schedule alarm);
+    void update(Schedule schedule);
 
     @Delete
-    void delete(Schedule alarm);
+    void delete(Schedule schedule);
 }

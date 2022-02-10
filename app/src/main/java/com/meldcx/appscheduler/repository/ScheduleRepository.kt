@@ -6,7 +6,7 @@ import com.meldcx.appscheduler.data.ScheduleDao
 
 class ScheduleRepository constructor(private val scheduleDao: ScheduleDao) :
     ScheduleRepositoryInterface {
-    val alarmsLiveData: LiveData<List<Schedule>> = scheduleDao.alarms
+    val alarmsLiveData: LiveData<List<Schedule>> = scheduleDao.schedules
 
     override suspend fun insert(schedule: Schedule) {
         scheduleDao.insert(schedule)

@@ -31,14 +31,14 @@ class ScheduleDaoTest {
     }
 
     @Test
-    fun testIfEmpty() {
-        val liveData = taskDatabase!!.alarmDao().alarms
+    fun testLoadData() {
+        val liveData = taskDatabase!!.alarmDao().schedules
         val items = LiveDataTestUtil.getValue(liveData)
         assertThat(items?.size, Is(1))
     }
 
     @Test
-    fun testLoadPopularArticles() {
+    fun testInsertSchedule() {
         val entity = Schedule(
             123,
             1,
@@ -57,7 +57,7 @@ class ScheduleDaoTest {
             false
         )
         taskDatabase!!.alarmDao().insert(entity)
-        val taskList = LiveDataTestUtil.getValue(taskDatabase!!.alarmDao().alarms)
+        val taskList = LiveDataTestUtil.getValue(taskDatabase!!.alarmDao().schedules)
         assertThat(taskList!![0].alarmId, Is(123))
         assertThat(taskList.size, Is(1))
     }
