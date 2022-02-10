@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.createalarm
+package com.meldcx.appscheduler.ui.create
 
 import android.app.Activity
 import android.content.Intent

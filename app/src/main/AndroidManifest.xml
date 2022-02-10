@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.createalarm.CreateAlarmActivity" />
+        <activity android:name=".ui.create.CreateAlarmActivity" />
         <activity android:name=".ui.applist.AppListActivity" />
 
         <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver">

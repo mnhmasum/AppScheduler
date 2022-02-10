@@ -10,7 +10,7 @@ import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
-import com.meldcx.appscheduler.ui.createalarm.CreateScheduleViewModel
+import com.meldcx.appscheduler.ui.create.CreateScheduleViewModel
 import com.meldcx.appscheduler.ui.main.MainViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel
 

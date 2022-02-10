@@ -9,5 +9,5 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
     fun inject(app: MainApplication)
-    fun exposeAlarmDao(): ScheduleDao
+    fun exposeSchedulemDao(): ScheduleDao
 }

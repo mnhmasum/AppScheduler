@@ -6,7 +6,7 @@ import com.meldcx.appscheduler.LiveDataUtil
 import com.meldcx.appscheduler.MainCoroutineRule
 import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.repo.FakeCreateTaskRepository
-import com.meldcx.appscheduler.ui.createalarm.CreateScheduleViewModel
+import com.meldcx.appscheduler.ui.create.CreateScheduleViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule

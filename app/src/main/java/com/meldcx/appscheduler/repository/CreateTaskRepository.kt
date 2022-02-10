@@ -5,13 +5,11 @@ import com.meldcx.appscheduler.data.ScheduleDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CreateTaskRepository constructor(private val alarmDao: ScheduleDao) :
+class CreateTaskRepository constructor(private val scheduleDao: ScheduleDao) :
     CreateTaskRepositoryInterface {
 
     override suspend fun insert(schedule: Schedule) {
-        withContext(Dispatchers.IO) {
-            alarmDao.insert(schedule)
-        }
+        scheduleDao.insert(schedule)
     }
 
 }

@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
-import com.meldcx.appscheduler.ui.createalarm.CreateAlarmActivity
+import com.meldcx.appscheduler.ui.create.CreateAlarmActivity
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    fun openAlarmActivity() {
+    fun openCreateScheduleActivity() {
         startActivity(CreateAlarmActivity::class.java, false)
     }
 }

@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.createalarm
+package com.meldcx.appscheduler.ui.create
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,15 +9,12 @@ import com.meldcx.appscheduler.utils.Constant.Errors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateScheduleViewModel internal constructor(private val repository: CreateTaskRepositoryInterface) :
-    ViewModel() {
+class CreateScheduleViewModel internal constructor(private val repository: CreateTaskRepositoryInterface) : ViewModel() {
     private val errorList = ArrayList<Errors>()
     var validationErrors = MutableLiveData<MutableList<Errors>>()
 
-    fun insert(schedule: Schedule) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(schedule)
-        }
+    fun insert(schedule: Schedule) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(schedule)
     }
 
     fun isTaskValid(schedule: Schedule): Boolean {
