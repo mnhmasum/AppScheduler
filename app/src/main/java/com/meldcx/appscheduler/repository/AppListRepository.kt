@@ -3,6 +3,7 @@ package com.meldcx.appscheduler.repository
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import com.meldcx.appscheduler.data.AppItem
+import com.meldcx.appscheduler.ui.applist.WalletViewState
 
 
 class AppListRepository(private val pm: PackageManager) : AppListRepositoryInterface {
@@ -26,6 +27,16 @@ class AppListRepository(private val pm: PackageManager) : AppListRepositoryInter
         }
         return list
 
+    }
+
+    override suspend fun getAppItemTest(): List<AppItem> {
+
+        val list = ArrayList<AppItem>()
+        list.add(AppItem("One", ""))
+        list.add(AppItem("two", ""))
+        list.add(AppItem("three", ""))
+        WalletViewState.ResultAllPersona(list)
+        return list
     }
 
 }
