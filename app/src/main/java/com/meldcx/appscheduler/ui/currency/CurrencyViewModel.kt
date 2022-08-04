@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.ui.main
+package com.meldcx.appscheduler.ui.currency
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,8 @@ import com.meldcx.appscheduler.repository.ScheduleRepositoryInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel internal constructor(private val scheduleRepository: ScheduleRepositoryInterface) : ViewModel() {
+class CurrencyViewModel internal constructor(private val scheduleRepository: ScheduleRepositoryInterface) :
+    ViewModel() {
     var scheduleLiveData: LiveData<List<Schedule>> = scheduleRepository.getScheduleLiveData()
 
     fun update(schedule: Schedule) = viewModelScope.launch(Dispatchers.IO) {
