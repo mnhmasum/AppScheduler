@@ -4,7 +4,7 @@ package com.meldcx.appscheduler.retrofit;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+public class CurrencyData {
 
     @SerializedName("disclaimer")
     private String disclaimer;

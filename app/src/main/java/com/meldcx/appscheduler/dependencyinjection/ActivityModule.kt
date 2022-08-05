@@ -8,9 +8,12 @@ import com.meldcx.appscheduler.dependencyinjection.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository
+import com.meldcx.appscheduler.repository.CurrencyListRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.create.CreateScheduleViewModel
+import com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter
+import com.meldcx.appscheduler.ui.currency.CurrencyViewModel
 import com.meldcx.appscheduler.ui.main.MainViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel
 
@@ -36,6 +39,11 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
+    fun provideCurrencyListRepository(): CurrencyListRepository {
+        return CurrencyListRepository()
+    }
+
+    @Provides
     @PerActivity
     fun provideAlarmListViewModel(scheduleRepository: ScheduleRepository): MainViewModel {
         return MainViewModel(scheduleRepository)
@@ -49,6 +57,12 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
+    fun provideCurrencyViewModel(currencyListRepository: CurrencyListRepository): CurrencyViewModel {
+        return CurrencyViewModel(currencyListRepository)
+    }
+
+    @Provides
+    @PerActivity
     fun provideAppListViewModel(appListRepository: AppListRepository): AppListViewModel {
         return AppListViewModel(appListRepository)
     }
@@ -57,6 +71,12 @@ class ActivityModule(private val context: Context) {
     @PerActivity
     fun provideAlarmRecyclerViewAdapter(alarmListViewModel: MainViewModel): MainViewAdapter {
         return MainViewAdapter(alarmListViewModel)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideCurrencyViewAdapter(currencyViewModel: CurrencyViewModel): CurrencyViewAdapter {
+        return CurrencyViewAdapter(currencyViewModel)
     }
 
     @Provides

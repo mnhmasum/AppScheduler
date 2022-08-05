@@ -2,6 +2,7 @@ package com.meldcx.appscheduler.retrofit
 
 import android.app.Application
 import com.meldcx.appscheduler.BuildConfig
+import com.meldcx.appscheduler.utils.Constant
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,7 +29,7 @@ private fun httpClientBuilder(): OkHttpClient.Builder =
 
 private fun getRetrofitBuilderDefaults() =
     Retrofit.Builder()
-        .baseUrl(baseUrl)
+        .baseUrl(Constant.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
 
 private fun provideOkHttpClientOAuth(cache: Cache): OkHttpClient =

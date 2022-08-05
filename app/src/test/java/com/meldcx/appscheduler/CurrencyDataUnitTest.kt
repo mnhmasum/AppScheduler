@@ -9,7 +9,7 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class CurrencyDataUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(6, 2 + 2)

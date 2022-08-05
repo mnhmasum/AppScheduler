@@ -7,38 +7,39 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.databinding.RecyclerviewAlarmBinding
+import com.meldcx.appscheduler.databinding.ItemCurrencyBinding
+import com.meldcx.appscheduler.retrofit.Rate
 import java.util.*
 
-class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : RecyclerView.Adapter<CurrencyViewAdapter.AlarmViewHolder>() {
-    private var mScheduleList: List<Schedule>
+class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : RecyclerView.Adapter<CurrencyViewAdapter.CurrencyViewHolder>() {
+    private var currencyRateList: List<Rate>
     private lateinit var mContext: Context
 
-    inner class AlarmViewHolder(val recyclerviewAlarmBinding: RecyclerviewAlarmBinding) :
+    inner class CurrencyViewHolder(val recyclerviewAlarmBinding: ItemCurrencyBinding) :
         RecyclerView.ViewHolder(recyclerviewAlarmBinding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
-        val binding = DataBindingUtil.inflate<RecyclerviewAlarmBinding>(LayoutInflater.from(parent.context), R.layout.recyclerview_alarm, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
+        val binding = DataBindingUtil.inflate<ItemCurrencyBinding>(LayoutInflater.from(parent.context), R.layout.item_currency, parent, false)
         binding.apply {
-            /*adapter = this@CurrencyViewAdapter
-            viewModel = currencyViewModel*/
+            adapter = this@CurrencyViewAdapter
+            viewModel = currencyViewModel
         }
         this.mContext = parent.context
-        return AlarmViewHolder(binding)
+        return CurrencyViewHolder(binding)
     }
 
     fun onToggle(schedule: Schedule, isChecked: Boolean) {
         if (isChecked) {
             schedule.schedule(mContext)
-            currencyViewModel.update(schedule)
+            //currencyViewModel.update(schedule)
         } else {
             schedule.cancelAlarm(mContext)
-            currencyViewModel.update(schedule)
+            //currencyViewModel.update(schedule)
         }
     }
 
     fun delete(schedule: Schedule) {
-        currencyViewModel.delete(schedule)
+        //currencyViewModel.delete(schedule)
         schedule.cancelAlarm(mContext)
     }
 
@@ -46,20 +47,20 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : Re
         return position
     }
 
-    override fun onBindViewHolder(holder: AlarmViewHolder, position: Int) {
-        holder.recyclerviewAlarmBinding.alarm = mScheduleList[position]
+    override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
+        holder.recyclerviewAlarmBinding.rate = currencyRateList[position]
     }
 
     override fun getItemCount(): Int {
-        return mScheduleList.size
+        return currencyRateList.size
     }
 
-    fun setAlarms(schedules: List<Schedule>) {
-        this.mScheduleList = schedules
+    fun setCurrencyList(rates: List<Rate>) {
+        this.currencyRateList = rates
         notifyDataSetChanged()
     }
 
     init {
-        mScheduleList = ArrayList()
+        currencyRateList = ArrayList()
     }
 }

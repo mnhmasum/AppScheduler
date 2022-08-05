@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".ui.create.CreateAlarmActivity" />
         <activity android:name=".ui.applist.AppListActivity" />
+        <activity android:name=".ui.currency.CurrencyActivity" />
 
         <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver">
             <intent-filter>

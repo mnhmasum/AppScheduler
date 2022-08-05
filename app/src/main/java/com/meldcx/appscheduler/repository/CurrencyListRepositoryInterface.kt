@@ -1,9 +1,10 @@
 package com.meldcx.appscheduler.repository
 
-import com.meldcx.appscheduler.data.AppItem
-import com.meldcx.appscheduler.retrofit.Rates
+import androidx.lifecycle.LiveData
+import com.meldcx.appscheduler.retrofit.CurrencyData
+import retrofit2.Response
 
 
 interface CurrencyListRepositoryInterface {
-    suspend fun getCurrencyRateList(): List<Rates>
+    suspend fun getCurrencyRateList(): Response<CurrencyData>
 }

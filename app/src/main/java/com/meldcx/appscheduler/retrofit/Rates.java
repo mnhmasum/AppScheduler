@@ -28,7 +28,7 @@ public class Rates {
     @SerializedName("BAM")
     private Double bam;
     @SerializedName("BBD")
-    private Integer bbd;
+    private Double bbd;
     @SerializedName("BDT")
     private Double bdt;
     @SerializedName("BGN")
@@ -39,7 +39,7 @@ public class Rates {
     @Expose
     private Double bif;
     @SerializedName("BMD")
-    private Integer bmd;
+    private Double bmd;
     @SerializedName("BND")
     private Double bnd;
     @SerializedName("BOB")
@@ -47,7 +47,7 @@ public class Rates {
     @SerializedName("BRL")
     private Double brl;
     @SerializedName("BSD")
-    private Integer bsd;
+    private Double bsd;
     @SerializedName("BTC")
     private Double btc;
     @SerializedName("BTN")
@@ -77,7 +77,7 @@ public class Rates {
     @SerializedName("CRC")
     private Double crc;
     @SerializedName("CUC")
-    private Integer cuc;
+    private Double cuc;
     @SerializedName("CUP")
     private Double cup;
     @SerializedName("CVE")
@@ -95,7 +95,7 @@ public class Rates {
     @SerializedName("EGP")
     private Double egp;
     @SerializedName("ERN")
-    private Integer ern;
+    private Double ern;
     @SerializedName("ETB")
     private Double etb;
     @SerializedName("EUR")
@@ -143,7 +143,7 @@ public class Rates {
     @SerializedName("IQD")
     private Double iqd;
     @SerializedName("IRR")
-    private Integer irr;
+    private Double irr;
     @SerializedName("ISK")
     private Double isk;
     @SerializedName("JEP")
@@ -163,7 +163,7 @@ public class Rates {
     @SerializedName("KMF")
     private Double kmf;
     @SerializedName("KPW")
-    private Integer kpw;
+    private Double kpw;
     @SerializedName("KRW")
     private Double krw;
     @SerializedName("KWD")
@@ -227,7 +227,7 @@ public class Rates {
     @SerializedName("OMR")
     private Double omr;
     @SerializedName("PAB")
-    private Integer pab;
+    private Double pab;
     @SerializedName("PEN")
     private Double pen;
     @SerializedName("PGK")
@@ -249,7 +249,7 @@ public class Rates {
     @SerializedName("RUB")
     private Double rub;
     @SerializedName("RWF")
-    private Integer rwf;
+    private Double rwf;
     @SerializedName("SAR")
     private Double sar;
     @SerializedName("SBD")
@@ -299,13 +299,13 @@ public class Rates {
     @SerializedName("TWD")
     private Double twd;
     @SerializedName("TZS")
-    private Integer tzs;
+    private Double tzs;
     @SerializedName("UAH")
     private Double uah;
     @SerializedName("UGX")
     private Double ugx;
     @SerializedName("USD")
-    private Integer usd;
+    private Double usd;
     @SerializedName("UYU")
     private Double uyu;
     @SerializedName("UZS")
@@ -343,7 +343,7 @@ public class Rates {
     @SerializedName("ZMW")
     private Double zmw;
     @SerializedName("ZWL")
-    private Integer zwl;
+    private Double zwl;
 
     public Double getAed() {
         return aed;
@@ -433,11 +433,11 @@ public class Rates {
         this.bam = bam;
     }
 
-    public Integer getBbd() {
+    public Double getBbd() {
         return bbd;
     }
 
-    public void setBbd(Integer bbd) {
+    public void setBbd(Double bbd) {
         this.bbd = bbd;
     }
 
@@ -473,11 +473,11 @@ public class Rates {
         this.bif = bif;
     }
 
-    public Integer getBmd() {
+    public Double getBmd() {
         return bmd;
     }
 
-    public void setBmd(Integer bmd) {
+    public void setBmd(Double bmd) {
         this.bmd = bmd;
     }
 
@@ -505,11 +505,11 @@ public class Rates {
         this.brl = brl;
     }
 
-    public Integer getBsd() {
+    public Double getBsd() {
         return bsd;
     }
 
-    public void setBsd(Integer bsd) {
+    public void setBsd(Double bsd) {
         this.bsd = bsd;
     }
 
@@ -625,11 +625,11 @@ public class Rates {
         this.crc = crc;
     }
 
-    public Integer getCuc() {
+    public Double getCuc() {
         return cuc;
     }
 
-    public void setCuc(Integer cuc) {
+    public void setCuc(Double cuc) {
         this.cuc = cuc;
     }
 
@@ -697,11 +697,11 @@ public class Rates {
         this.egp = egp;
     }
 
-    public Integer getErn() {
+    public Double getErn() {
         return ern;
     }
 
-    public void setErn(Integer ern) {
+    public void setErn(Double ern) {
         this.ern = ern;
     }
 
@@ -889,11 +889,11 @@ public class Rates {
         this.iqd = iqd;
     }
 
-    public Integer getIrr() {
+    public Double getIrr() {
         return irr;
     }
 
-    public void setIrr(Integer irr) {
+    public void setIrr(Double irr) {
         this.irr = irr;
     }
 
@@ -969,11 +969,11 @@ public class Rates {
         this.kmf = kmf;
     }
 
-    public Integer getKpw() {
+    public Double getKpw() {
         return kpw;
     }
 
-    public void setKpw(Integer kpw) {
+    public void setKpw(Double kpw) {
         this.kpw = kpw;
     }
 
@@ -1225,11 +1225,11 @@ public class Rates {
         this.omr = omr;
     }
 
-    public Integer getPab() {
+    public Double getPab() {
         return pab;
     }
 
-    public void setPab(Integer pab) {
+    public void setPab(Double pab) {
         this.pab = pab;
     }
 
@@ -1313,11 +1313,11 @@ public class Rates {
         this.rub = rub;
     }
 
-    public Integer getRwf() {
+    public Double getRwf() {
         return rwf;
     }
 
-    public void setRwf(Integer rwf) {
+    public void setRwf(Double rwf) {
         this.rwf = rwf;
     }
 
@@ -1513,11 +1513,11 @@ public class Rates {
         this.twd = twd;
     }
 
-    public Integer getTzs() {
+    public Double getTzs() {
         return tzs;
     }
 
-    public void setTzs(Integer tzs) {
+    public void setTzs(Double tzs) {
         this.tzs = tzs;
     }
 
@@ -1537,11 +1537,11 @@ public class Rates {
         this.ugx = ugx;
     }
 
-    public Integer getUsd() {
+    public Double getUsd() {
         return usd;
     }
 
-    public void setUsd(Integer usd) {
+    public void setUsd(Double usd) {
         this.usd = usd;
     }
 
@@ -1689,11 +1689,11 @@ public class Rates {
         this.zmw = zmw;
     }
 
-    public Integer getZwl() {
+    public Double getZwl() {
         return zwl;
     }
 
-    public void setZwl(Integer zwl) {
+    public void setZwl(Double zwl) {
         this.zwl = zwl;
     }
 

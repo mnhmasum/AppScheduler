@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.data.ScheduleDao
 
-class ScheduleRepository constructor(private val scheduleDao: ScheduleDao) :
-    ScheduleRepositoryInterface {
+class ScheduleRepository constructor(private val scheduleDao: ScheduleDao) : ScheduleRepositoryInterface {
     val alarmsLiveData: LiveData<List<Schedule>> = scheduleDao.schedules
 
     override suspend fun insert(schedule: Schedule) {
