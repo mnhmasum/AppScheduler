@@ -61,8 +61,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun launchOverlayAppPermission() {
         if (!Settings.canDrawOverlays(this)) {
-            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-            startForResult.launch(intent)
+            /*val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            startForResult.launch(intent)*/
         }
     }
 

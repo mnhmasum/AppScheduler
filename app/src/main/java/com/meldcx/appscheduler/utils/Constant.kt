@@ -6,6 +6,7 @@ class Constant {
         const val APP_NAME = "APP_NAME"
         const val API_KEY = "52a0ca2c905b4049bcc65ec81a369f22"
         const val BASE_URL = "https://openexchangerates.org/api/"
+        const val ERROR_MSG = "Data not Found"
     }
 
     enum class Errors {

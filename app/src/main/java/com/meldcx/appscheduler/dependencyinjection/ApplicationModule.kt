@@ -6,6 +6,7 @@ import com.meldcx.appscheduler.data.ScheduleDao
 import dagger.Module
 import dagger.Provides
 import com.meldcx.appscheduler.data.AppDatabase
+import com.meldcx.appscheduler.data.CurrencyDao
 import com.meldcx.appscheduler.dependencyinjection.qualifier.DatabaseName
 import javax.inject.Singleton
 
@@ -27,6 +28,12 @@ class ApplicationModule(private val mApplication: Application) {
     @Singleton
     fun provideAlarmDao(appDatabase: AppDatabase): ScheduleDao {
         return appDatabase.alarmDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCurrencyDao(appDatabase: AppDatabase): CurrencyDao {
+        return appDatabase.currencyDao()
     }
 
     @Provides

@@ -19,7 +19,7 @@
         android:roundIcon="@drawable/ic_repeat_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppScheduler">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.currency.CurrencyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".ui.create.CreateAlarmActivity" />
         <activity android:name=".ui.applist.AppListActivity" />
-        <activity android:name=".ui.currency.CurrencyActivity" />
+        <activity android:name=".ui.main.MainActivity" />
 
         <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver">
             <intent-filter>

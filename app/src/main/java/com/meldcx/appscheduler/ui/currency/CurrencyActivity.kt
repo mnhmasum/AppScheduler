@@ -1,7 +1,6 @@
 package com.meldcx.appscheduler.ui.currency
 
 import android.os.Build
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +10,7 @@ import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.AppListIntent
 import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.databinding.ActivityCurrencyConvertBinding
-import kotlinx.android.synthetic.main.activity_app_list.*
+import kotlinx.android.synthetic.main.activity_app_list.progressBar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,7 +41,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
 
         lifecycleScope.launch {
             launch {
-                currencyViewModel.appListIntent.send(AppListIntent.FetchApps)
+                currencyViewModel.intent.send(AppListIntent.FetchApps)
             }
             launch {
                 currencyViewModel.dataState.collect { render(it) }
@@ -53,8 +52,9 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
     private fun render(it: AppState) {
         progressBar.isVisible = it is AppState.Loading
         when (it) {
-            is AppState.Success -> {toast("Base Currency ${it.list?.body()?.getBase()}")
-            //currencyViewAdapter.setCurrencyList(it.list?.body()!)
+            is AppState.Success -> {
+                currencyViewAdapter.setCurrencyList(it.data)
+                //spinnerCurrency.adapter = MoodArrayAdapter(this, it.data.rateList)
             }
             is AppState.Error -> toast(it.error)
         }

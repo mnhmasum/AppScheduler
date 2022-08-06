@@ -2,6 +2,7 @@ package com.meldcx.appscheduler.dependencyinjection
 
 import dagger.Component
 import com.meldcx.appscheduler.application.MainApplication
+import com.meldcx.appscheduler.data.CurrencyDao
 import com.meldcx.appscheduler.data.ScheduleDao
 import javax.inject.Singleton
 
@@ -10,4 +11,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(app: MainApplication)
     fun exposeSchedulemDao(): ScheduleDao
+    fun exposeCurrencyDao(): CurrencyDao
 }

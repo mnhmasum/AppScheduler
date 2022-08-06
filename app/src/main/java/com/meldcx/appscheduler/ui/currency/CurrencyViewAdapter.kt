@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.ItemCurrencyBinding
-import com.meldcx.appscheduler.retrofit.Rate
+import com.meldcx.appscheduler.data.CurrencyData
+import com.meldcx.appscheduler.data.Rate
 import java.util.*
 
 class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : RecyclerView.Adapter<CurrencyViewAdapter.CurrencyViewHolder>() {
@@ -55,8 +56,35 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : Re
         return currencyRateList.size
     }
 
-    fun setCurrencyList(rates: List<Rate>) {
-        this.currencyRateList = rates
+    fun setCurrencyList(data: CurrencyData?) {
+        val rates = ArrayList<Rate>()
+       /* data?.let {
+            rates.add(
+                Rate(
+                    "aed",
+                    it
+                )
+            )
+            rates.add(
+                Rate(
+                    "afn",
+                    it.getRates().afn
+                )
+            )
+            rates.add(
+                Rate(
+                    "all",
+                    it.getRates().all
+                )
+            )
+            rates.add(
+                Rate(
+                    "amd",
+                    it.getRates().amd
+                )
+            )*/
+        //}
+        this.currencyRateList = data?.rateList!!
         notifyDataSetChanged()
     }
 

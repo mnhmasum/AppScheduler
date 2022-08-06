@@ -1,6 +1,7 @@
 package com.meldcx.appscheduler.dependencyinjection
 
 import android.content.Context
+import com.meldcx.appscheduler.data.CurrencyDao
 import com.meldcx.appscheduler.data.ScheduleDao
 import dagger.Module
 import dagger.Provides
@@ -34,13 +35,13 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
-    fun provideAppListRepository(): AppListRepository {
-        return AppListRepository(context.packageManager)
+    fun provideCurrencyRepository(currencyDao: CurrencyDao): CurrencyListRepository {
+        return CurrencyListRepository(currencyDao)
     }
 
     @Provides
-    fun provideCurrencyListRepository(): CurrencyListRepository {
-        return CurrencyListRepository()
+    fun provideAppListRepository(): AppListRepository {
+        return AppListRepository(context.packageManager)
     }
 
     @Provides

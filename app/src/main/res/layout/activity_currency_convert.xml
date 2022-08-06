@@ -14,6 +14,10 @@
             type="com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter" />
 
         <variable
+            name="spinnerAdapter"
+            type="com.meldcx.appscheduler.ui.currency.CurrencySpinnerAdapter" />
+
+        <variable
             name="activity"
             type="com.meldcx.appscheduler.ui.currency.CurrencyActivity" />
     </data>
@@ -33,50 +37,41 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="App Scheduler" />
 
-        <!--<Button
-            android:id="@+id/buttonAddAlarm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:onClick="@{(view) -> activity.openCreateScheduleActivity()}"
-            android:text="ADD +"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/buttonAddAlarm"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCurrency"
             app:layout_constraintVertical_bias="1.0"
-            app:setAdapter="@{adapter}"
-            app:submitCurrencyList="@{viewModel.currencyLiveData}"/>
+            app:setAdapter="@{adapter}" />
 
         <EditText
             android:id="@+id/editTextNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="2dp"
-            android:ems="10"
+            android:hint="Enter your amount"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <Spinner
-            android:id="@+id/spinner2"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerCurrency"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+            app:setAdapterTest="@{viewModel.mutableLiveData}"
+            app:clicks="@{viewModel.rateOfCurrency}"
             app:layout_constraintVertical_bias="0.0" />
 
         <ProgressBar

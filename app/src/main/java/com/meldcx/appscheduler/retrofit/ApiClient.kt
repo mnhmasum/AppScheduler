@@ -1,5 +1,6 @@
 package com.meldcx.appscheduler.retrofit
 
+import com.meldcx.appscheduler.data.CurrencyData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

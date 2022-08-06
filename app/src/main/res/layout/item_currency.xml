@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="rate"
-            type="com.meldcx.appscheduler.retrofit.Rate" />
+            type="com.meldcx.appscheduler.data.Rate" />
 
         <variable
             name="adapter"
@@ -37,9 +37,17 @@
                 android:padding="6dp">
 
                 <TextView
+                    android:id="@+id/textViewCurrencyName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{rate.currencyName"/>
+                    android:text="@{rate.currencyName}"/>
+
+                <TextView
+                    android:id="@+id/textViewRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewCurrencyName"
+                    android:text="@{rate.readableRate}"/>
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
