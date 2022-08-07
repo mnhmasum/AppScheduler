@@ -12,6 +12,7 @@ import com.meldcx.appscheduler.data.CurrencyData
 import com.meldcx.appscheduler.data.Rate
 import com.meldcx.appscheduler.repository.CurrencyListRepositoryInterface
 import com.meldcx.appscheduler.utils.Constant
+import com.meldcx.appscheduler.utils.ConverterUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,57 +46,28 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
     private fun getLatestData() {
         viewModelScope.launch(Dispatchers.IO) {
             _dataState.value = AppState.Loading
-            _dataState.value = getLatestCurrencyRates()
+            _dataState.value = AppState.Success(getCurrencyRateFromAPI())
         }
     }
 
-    private suspend fun getLatestCurrencyRates(): AppState {
-        val dataFromDB = currencyRepoInterface.getCurrencyDataFromDB()
-        return if (isOfflineAvailable(dataFromDB)) {
-            processDatabase(dataFromDB)
-        } else {
-            getCurrencyRateFromAPI()
-        }
-    }
-
-    private fun processDatabase(dataFromDB: CurrencyData): AppState.Success {
-        dataFromDB.setRateList(getCurrencyRateFromDB())
-        updateSpinnerData(dataFromDB)
-        return AppState.Success(dataFromDB)
+    private suspend fun getCurrencyRateFromAPI(): CurrencyData? {
+        val result = currencyRepoInterface.getCurrencyDataFromApi()
+        result?.let { updateSpinnerData(it) }
+        return result
     }
 
     private fun updateSpinnerData(dataFromDB: CurrencyData) {
         mutableLiveData.postValue(dataFromDB)
     }
 
-    private fun getCurrencyRateFromDB(): List<Rate> {
-        return currencyRepoInterface.getCurrencyRate()
-    }
-
-    private suspend fun getCurrencyRateFromAPI(): AppState {
-        val result = currencyRepoInterface.getCurrencyDataFromApi()
-        if (result.isSuccessful) {
-            result.body()?.let {
-                currencyRepoInterface.insert(it)
-                updateSpinnerData(it)
-                return AppState.Success(result.body())
-            }
-        }
-
-        return AppState.Error(Constant.ERROR_MSG)
-    }
-
     val rateOfCurrency = ObservableField<Rate>().apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 _dataState.value = AppState.Loading
-
                 this@apply.get()?.let { Log.d("value", it.currencyName) } //selected value
+                //ConverterUtil.convertValueAndGet()
             }
         })
     }
-
-    private fun isOfflineAvailable(dbResult: CurrencyData) = dbResult.base == "USD"
-
 
 }

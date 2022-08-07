@@ -9,7 +9,7 @@ import retrofit2.Response
 interface CurrencyListRepositoryInterface {
     suspend fun insert(currencyData: CurrencyData)
     suspend fun insert(rate: List<Rate>)
-    suspend fun getCurrencyDataFromApi(): Response<CurrencyData>
+    suspend fun getCurrencyDataFromApi(): CurrencyData?
     fun getCurrencyDataFromDB(): CurrencyData
     fun getCurrencyRate(): List<Rate>
 }
