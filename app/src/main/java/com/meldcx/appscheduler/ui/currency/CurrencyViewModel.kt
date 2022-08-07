@@ -3,11 +3,13 @@ package com.meldcx.appscheduler.ui.currency
 import android.util.Log
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.meldcx.appscheduler.data.*
+import com.meldcx.appscheduler.data.AppListIntent
+import com.meldcx.appscheduler.data.AppState
+import com.meldcx.appscheduler.data.CurrencyData
+import com.meldcx.appscheduler.data.Rate
 import com.meldcx.appscheduler.repository.CurrencyListRepositoryInterface
 import com.meldcx.appscheduler.utils.Constant
 import kotlinx.coroutines.Dispatchers
@@ -18,17 +20,16 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyListRepositoryInterface) : ViewModel() {
-    val mutableLiveData = MutableLiveData<CurrencyData>()
-    //var scheduleLiveData: LiveData<CurrencyData> = currencyRepoInterface.getCurrencyDataFromDB()
+class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyListRepositoryInterface) :
+    ViewModel() {
     val intent = Channel<AppListIntent>()
+    val mutableLiveData = MutableLiveData<CurrencyData>()
     private val _dataState = MutableStateFlow<AppState>(AppState.Idle)
     val dataState: StateFlow<AppState>
         get() = _dataState
 
     init {
         handleIntentAction()
-
     }
 
     private fun handleIntentAction() {
@@ -45,28 +46,39 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
         viewModelScope.launch(Dispatchers.IO) {
             _dataState.value = AppState.Loading
             _dataState.value = getLatestCurrencyRates()
-
         }
     }
 
     private suspend fun getLatestCurrencyRates(): AppState {
-        val dbResult = currencyRepoInterface.getCurrencyDataFromDB()
-        Log.d("ISDB==>", "getLatestCurrencyRates: " + dbResult)
-        if(dbResult?.base == "USD") {
-            //dbResult.rateList.
-            mutableLiveData.postValue(dbResult)
-            return AppState.Success(dbResult)
+        val dataFromDB = currencyRepoInterface.getCurrencyDataFromDB()
+        return if (isOfflineAvailable(dataFromDB)) {
+            processDatabase(dataFromDB)
         } else {
-            val result = currencyRepoInterface.getCurrencyDataFromApi()
-            if (result.isSuccessful) {
-                val dbResult = currencyRepoInterface.getCurrencyDataFromDB()
-                Log.d("ISDB==>", "getLatestCurrencyRates: " + dbResult?.base)
-                result.body()?.let {
-                    currencyRepoInterface.insert(it)
-                    currencyRepoInterface.insert(it.rateList)
-                    mutableLiveData.postValue(result.body())
-                    return AppState.Success(result.body())
-                }
+            getCurrencyRateFromAPI()
+        }
+    }
+
+    private fun processDatabase(dataFromDB: CurrencyData): AppState.Success {
+        dataFromDB.setRateList(getCurrencyRateFromDB())
+        updateSpinnerData(dataFromDB)
+        return AppState.Success(dataFromDB)
+    }
+
+    private fun updateSpinnerData(dataFromDB: CurrencyData) {
+        mutableLiveData.postValue(dataFromDB)
+    }
+
+    private fun getCurrencyRateFromDB(): List<Rate> {
+        return currencyRepoInterface.getCurrencyRate()
+    }
+
+    private suspend fun getCurrencyRateFromAPI(): AppState {
+        val result = currencyRepoInterface.getCurrencyDataFromApi()
+        if (result.isSuccessful) {
+            result.body()?.let {
+                currencyRepoInterface.insert(it)
+                updateSpinnerData(it)
+                return AppState.Success(result.body())
             }
         }
 
@@ -76,22 +88,14 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
     val rateOfCurrency = ObservableField<Rate>().apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                _dataState.value = AppState.Loading
+
                 this@apply.get()?.let { Log.d("value", it.currencyName) } //selected value
             }
         })
     }
 
-    /* fun update(schedule: Schedule) = viewModelScope.launch(Dispatchers.IO) {
-         currencyListRepositoryInterface.update(schedule)
-     }d
-
-     fun insert(schedule: Schedule) = viewModelScope.launch(Dispatchers.IO) {
-         currencyListRepositoryInterface.insert(schedule)
-     }
-
-     fun delete(schedule: Schedule) = viewModelScope.launch(Dispatchers.IO) {
-         currencyListRepositoryInterface.delete(schedule)
-     }*/
+    private fun isOfflineAvailable(dbResult: CurrencyData) = dbResult.base == "USD"
 
 
 }

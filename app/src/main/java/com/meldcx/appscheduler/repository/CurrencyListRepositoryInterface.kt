@@ -11,4 +11,5 @@ interface CurrencyListRepositoryInterface {
     suspend fun insert(rate: List<Rate>)
     suspend fun getCurrencyDataFromApi(): Response<CurrencyData>
     fun getCurrencyDataFromDB(): CurrencyData
+    fun getCurrencyRate(): List<Rate>
 }

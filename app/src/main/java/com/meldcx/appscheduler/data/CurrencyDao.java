@@ -25,7 +25,7 @@ public interface CurrencyDao {
     void deleteAll();
 
     @Query("SELECT * FROM currency_rate")
-    LiveData<List<Rate>> getRates();
+    List<Rate> getRates();
 
     @Query("SELECT * FROM currency_base LIMIT 1")
     CurrencyData getCurrencyBase();

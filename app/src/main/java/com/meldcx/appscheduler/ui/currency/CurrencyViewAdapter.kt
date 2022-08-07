@@ -84,7 +84,7 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : Re
                 )
             )*/
         //}
-        this.currencyRateList = data?.rateList!!
+        this.currencyRateList = data?.list!!
         notifyDataSetChanged()
     }
 

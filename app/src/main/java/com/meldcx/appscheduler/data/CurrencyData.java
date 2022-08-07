@@ -29,6 +29,9 @@ public class CurrencyData {
     @SerializedName("rates")
     public Rates rates;
 
+    @Ignore
+    public ArrayList<Rate> list = new ArrayList();
+
     public String getDisclaimer() {
         return disclaimer;
     }
@@ -69,8 +72,13 @@ public class CurrencyData {
         this.rates = rates;
     }
 
-    public List<Rate> getRateList() {
-        ArrayList<Rate> list = new ArrayList();
+    public void setRateList(List<Rate> rates){
+        list.clear();
+        list.addAll(rates);
+    }
+
+    public List<Rate> getRateListFromAPI() {
+        list.clear();
         list.add(new Rate("AED",rates.getAed()));
         list.add(new Rate("AFN",rates.getAfn()));
         list.add(new Rate("ALL",rates.getAll()));

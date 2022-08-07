@@ -30,7 +30,7 @@ fun setAdapter(
 @BindingAdapter(value = ["setAdapterTest"], requireAll = false)
 fun setAdapterTest(spinner: Spinner, projects: CurrencyData?) {
     projects?.let {
-        spinner.adapter = it.rateList?.let { CurrencySpinnerAdapter(spinner.context, it) }
+        spinner.adapter = it.list?.let { CurrencySpinnerAdapter(spinner.context, it) }
         spinner.setSelection(146)
         //setCurrentSelection(spinner, selectedUser)
         //setSpinnerListener(spinner, listener)
