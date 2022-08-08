@@ -98,15 +98,15 @@ fun setOnLongClickListener(view: View, func: () -> Unit) {
     }
 }
 
-@BindingAdapter("clicks")
-fun listenClicks(spinner: AppCompatSpinner, result: ObservableField<Rate>) {
+@BindingAdapter("changeListener")
+fun listenClicks(spinner: AppCompatSpinner, rate: ObservableField<Rate>) {
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
         }
 
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            result.set(parent?.getItemAtPosition(position) as Rate)
+            rate.set(parent?.getItemAtPosition(position) as Rate)
         }
     }
 }

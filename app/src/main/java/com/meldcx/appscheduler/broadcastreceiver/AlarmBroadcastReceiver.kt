@@ -5,8 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.util.Log
+import com.meldcx.appscheduler.application.MainApplication
+import com.meldcx.appscheduler.repository.CurrencyListRepository
 import com.meldcx.appscheduler.services.RescheduleAlarmsService
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
+import com.meldcx.appscheduler.utils.enableIntervalAPICallAlarmService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -15,15 +22,12 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         this.context = context
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
-            startRescheduleAlarmsService(context)
+            context.enableIntervalAPICallAlarmService()
         } else {
-            if (!intent.getBooleanExtra(RECURRING, false)) {
-                startAlarmService(context, intent)
-            }
-            run {
-                if (alarmIsToday(intent)) {
-                    startAlarmService(context, intent)
-                }
+            GlobalScope.launch(Dispatchers.IO) {
+                val repository = CurrencyListRepository(MainApplication.appDatabase.currencyDao())
+                repository.getCurrencyData()
+                Log.d("Alarm Fired", "onReceive: Yes fired up")
             }
         }
     }

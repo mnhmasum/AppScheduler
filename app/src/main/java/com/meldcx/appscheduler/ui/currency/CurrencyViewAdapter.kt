@@ -12,7 +12,8 @@ import com.meldcx.appscheduler.data.CurrencyData
 import com.meldcx.appscheduler.data.Rate
 import java.util.*
 
-class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : RecyclerView.Adapter<CurrencyViewAdapter.CurrencyViewHolder>() {
+class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) :
+    RecyclerView.Adapter<CurrencyViewAdapter.CurrencyViewHolder>() {
     private var currencyRateList: List<Rate>
     private lateinit var mContext: Context
 
@@ -20,7 +21,12 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : Re
         RecyclerView.ViewHolder(recyclerviewAlarmBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
-        val binding = DataBindingUtil.inflate<ItemCurrencyBinding>(LayoutInflater.from(parent.context), R.layout.item_currency, parent, false)
+        val binding = DataBindingUtil.inflate<ItemCurrencyBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.item_currency,
+            parent,
+            false
+        )
         binding.apply {
             adapter = this@CurrencyViewAdapter
             viewModel = currencyViewModel
@@ -56,35 +62,8 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) : Re
         return currencyRateList.size
     }
 
-    fun setCurrencyList(data: CurrencyData?) {
-        val rates = ArrayList<Rate>()
-       /* data?.let {
-            rates.add(
-                Rate(
-                    "aed",
-                    it
-                )
-            )
-            rates.add(
-                Rate(
-                    "afn",
-                    it.getRates().afn
-                )
-            )
-            rates.add(
-                Rate(
-                    "all",
-                    it.getRates().all
-                )
-            )
-            rates.add(
-                Rate(
-                    "amd",
-                    it.getRates().amd
-                )
-            )*/
-        //}
-        this.currencyRateList = data?.list!!
+    fun setCurrencyList(data: List<Rate>?) {
+        data?.let { this.currencyRateList = it }
         notifyDataSetChanged()
     }
 

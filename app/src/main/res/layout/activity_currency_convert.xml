@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.meldcx.appscheduler.ui.currency.CurrencyViewModel" />
@@ -37,53 +37,68 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="App Scheduler" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/buttonAddAlarm"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCurrency"
-            app:layout_constraintVertical_bias="1.0"
-            app:setAdapter="@{adapter}" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCurrencyLayout"
+            app:setAdapter="@{adapter}"
+            app:spanCount="3" />
 
         <EditText
             android:id="@+id/editTextNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
             android:layout_marginTop="2dp"
             android:hint="Enter your amount"
             android:inputType="number"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onTextChange(text)}"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerCurrency"
+        <LinearLayout
+            android:id="@+id/spinnerCurrencyLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:background="@color/gray"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-            app:setAdapterTest="@{viewModel.mutableLiveData}"
-            app:clicks="@{viewModel.rateOfCurrency}"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerCurrency"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:changeListener="@{activity.changeOfRate}"
+                app:setAdapterTest="@{viewModel.currencyDataLive}" />
+        </LinearLayout>
+
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.505" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCurrencyLayout"
+            app:layout_constraintVertical_bias="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,6 +5,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="rate"
             type="com.meldcx.appscheduler.data.Rate" />
@@ -33,21 +34,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:gravity="center_horizontal"
                 android:padding="6dp">
 
                 <TextView
                     android:id="@+id/textViewCurrencyName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{rate.currencyName}"/>
+                    android:gravity="center_horizontal"
+                    android:text="@{rate.currencyName}"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textViewRate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textViewCurrencyName"
-                    android:text="@{rate.readableRate}"/>
+                    android:gravity="center_horizontal"
+                    android:text="@{rate.readableRate}"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

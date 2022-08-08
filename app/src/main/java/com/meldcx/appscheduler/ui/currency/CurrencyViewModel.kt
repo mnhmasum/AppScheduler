@@ -1,17 +1,12 @@
 package com.meldcx.appscheduler.ui.currency
 
-import android.util.Log
-import androidx.databinding.Observable
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.meldcx.appscheduler.data.AppListIntent
 import com.meldcx.appscheduler.data.AppState
+import com.meldcx.appscheduler.data.ConverterIntent
 import com.meldcx.appscheduler.data.CurrencyData
-import com.meldcx.appscheduler.data.Rate
 import com.meldcx.appscheduler.repository.CurrencyListRepositoryInterface
-import com.meldcx.appscheduler.utils.Constant
 import com.meldcx.appscheduler.utils.ConverterUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -23,8 +18,8 @@ import kotlinx.coroutines.launch
 
 class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyListRepositoryInterface) :
     ViewModel() {
-    val intent = Channel<AppListIntent>()
-    val mutableLiveData = MutableLiveData<CurrencyData>()
+    val intent = Channel<ConverterIntent>()
+    val currencyDataLive = MutableLiveData<CurrencyData>()
     private val _dataState = MutableStateFlow<AppState>(AppState.Idle)
     val dataState: StateFlow<AppState>
         get() = _dataState
@@ -37,9 +32,19 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
         viewModelScope.launch {
             intent.consumeAsFlow().collect {
                 when (it) {
-                    is AppListIntent.FetchApps -> getLatestData()
+                    is ConverterIntent.FetchData -> getLatestData()
+                    is ConverterIntent.StartConversion -> startConversion(it)
                 }
             }
+        }
+    }
+
+    private fun startConversion(it: ConverterIntent.StartConversion) {
+        if (it.amount == 0.0) return
+        val convertedRateList = ConverterUtil.convertValueAndGet(it.amount, currencyDataLive.value?.list)
+        viewModelScope.launch(Dispatchers.IO) {
+            _dataState.value = AppState.Loading
+            _dataState.value = AppState.CompletedConversion(convertedRateList)
         }
     }
 
@@ -51,23 +56,21 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
     }
 
     private suspend fun getCurrencyRateFromAPI(): CurrencyData? {
-        val result = currencyRepoInterface.getCurrencyDataFromApi()
+        val result = currencyRepoInterface.getCurrencyData()
         result?.let { updateSpinnerData(it) }
         return result
     }
 
     private fun updateSpinnerData(dataFromDB: CurrencyData) {
-        mutableLiveData.postValue(dataFromDB)
+        currencyDataLive.postValue(dataFromDB)
     }
 
-    val rateOfCurrency = ObservableField<Rate>().apply {
-        addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                _dataState.value = AppState.Loading
-                this@apply.get()?.let { Log.d("value", it.currencyName) } //selected value
-                //ConverterUtil.convertValueAndGet()
+    fun onTextChange(text: CharSequence?) {
+        if (text.toString().isNotEmpty()) {
+            viewModelScope.launch(Dispatchers.IO) {
+                intent.send(ConverterIntent.StartConversion(text.toString().toDouble()))
             }
-        })
+        }
     }
 
 }

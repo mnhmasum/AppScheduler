@@ -72,6 +72,15 @@ class Schedule(
         isStarted = true
     }
 
+    fun start30SecondsRepeat(context: Context){
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmBroadcastReceiver::class.java)
+        val alarmPendingIntent = PendingIntent.getBroadcast(context, 999, intent, 0)
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            AlarmManager.INTERVAL_HALF_HOUR,
+            AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent)
+    }
+
     fun cancelAlarm(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmBroadcastReceiver::class.java)
