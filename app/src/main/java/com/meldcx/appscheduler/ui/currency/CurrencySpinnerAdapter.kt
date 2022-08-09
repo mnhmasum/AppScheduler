@@ -25,4 +25,8 @@ class CurrencySpinnerAdapter(ctx: Context, moods: List<Rate>) : ArrayAdapter<Rat
         view.textViewTitle.text = mood?.currencyName
         return view
     }
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
 }

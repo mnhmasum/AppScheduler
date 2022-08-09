@@ -11,4 +11,5 @@
     <color name="dark_bg">#141d26</color>
     <color name="yellow">#FFBF00</color>
     <color name="red">#FF0000</color>
+    <color name="red_soft">#FF0033</color>
 </resources>

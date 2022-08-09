@@ -1,5 +1,6 @@
 package com.meldcx.appscheduler
 
+import com.meldcx.appscheduler.utils.ConverterUtil
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -9,9 +10,10 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class CurrencyDataUnitTest {
+class ConverterUtilTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(6, 2 + 2)
+    fun convert_is_correct() {
+        val result = ConverterUtil.convertToBaseRate(94.62, 79.65, 1.0);
+        assertEquals(0.842, result, 0.1)
     }
 }

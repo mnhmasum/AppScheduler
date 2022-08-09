@@ -1,7 +1,10 @@
 package com.meldcx.appscheduler.utils
 
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
@@ -10,12 +13,13 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
-import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.data.CurrencyData
 import com.meldcx.appscheduler.data.Rate
-import com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter
+import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.ui.currency.CurrencySpinnerAdapter
+import com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewAdapter
+
 
 @BindingAdapter("setAdapter")
 fun setAdapter(
@@ -27,8 +31,8 @@ fun setAdapter(
     }
 }
 
-@BindingAdapter(value = ["setAdapterTest"], requireAll = false)
-fun setAdapterTest(spinner: Spinner, projects: CurrencyData?) {
+@BindingAdapter(value = ["setCurrencyList"], requireAll = false)
+fun setSpinnerAdapter(spinner: Spinner, projects: CurrencyData?) {
     projects?.let {
         spinner.adapter = it.list?.let { CurrencySpinnerAdapter(spinner.context, it) }
         spinner.setSelection(146)
@@ -111,4 +115,28 @@ fun listenClicks(spinner: AppCompatSpinner, rate: ObservableField<Rate>) {
     }
 }
 
+@BindingAdapter(value = ["selectedValue", "selectedValueAttrChanged"], requireAll = false)
+fun bindSpinnerData(
+    pAppCompatSpinner: AppCompatSpinner,
+    newSelectedValue: Rate?,
+    newTextAttrChanged: InverseBindingListener
+) {
+    pAppCompatSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+            newTextAttrChanged.onChange()
+            Log.d("Invergse postion", "onItemSelected: $position")
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
+    if (newSelectedValue != null) {
+        val pos = (pAppCompatSpinner.adapter as ArrayAdapter<Rate?>).getPosition(newSelectedValue)
+        pAppCompatSpinner.setSelection(pos, true)
+    }
+}
+
+@InverseBindingAdapter(attribute = "selectedValue", event = "selectedValueAttrChanged")
+fun captureSelectedValue(pAppCompatSpinner: AppCompatSpinner): Rate? {
+    return pAppCompatSpinner.selectedItem as Rate
+}
 

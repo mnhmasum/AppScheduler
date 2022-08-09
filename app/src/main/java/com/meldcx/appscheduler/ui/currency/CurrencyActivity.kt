@@ -1,9 +1,5 @@
 package com.meldcx.appscheduler.ui.currency
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
@@ -11,14 +7,12 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.lifecycleScope
 import com.meldcx.appscheduler.R
-import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
 import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.data.ConverterIntent
 import com.meldcx.appscheduler.data.Rate
 import com.meldcx.appscheduler.databinding.ActivityCurrencyConvertBinding
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
-import com.meldcx.appscheduler.utils.enableIntervalAPICallAlarmService
 import kotlinx.android.synthetic.main.activity_app_list.*
 import kotlinx.android.synthetic.main.activity_app_list.progressBar
 import kotlinx.android.synthetic.main.activity_currency_convert.*
@@ -51,7 +45,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
 
         lifecycleScope.launch {
             launch {
-                currencyViewModel.intent.send(ConverterIntent.FetchData)
+                currencyViewModel.intent.send(ConverterIntent.FETCH)
             }
             launch {
                 currencyViewModel.dataState.collect { render(it) }
@@ -72,18 +66,18 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
         currencyViewAdapter.setCurrencyList(it)
     }
 
-    val changeOfRate = ObservableField<Rate>().apply {
+    val changeOfCurrency = ObservableField<Rate>().apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                this@apply.get()?.let { inputSendToConverter() }
+                this@apply.get()?.let { inputSendToConverter(it.rate) }
             }
         })
     }
 
-    private fun inputSendToConverter() {
+    private fun inputSendToConverter(selectedRate:Double?) {
         val inputAmount: Double = getInput()
         lifecycleScope.launch {
-            val startConversion = ConverterIntent.StartConversion(inputAmount)
+            val startConversion = ConverterIntent.StartConversion(inputAmount, selectedRate)
             currencyViewModel.intent.send(startConversion)
         }
     }
