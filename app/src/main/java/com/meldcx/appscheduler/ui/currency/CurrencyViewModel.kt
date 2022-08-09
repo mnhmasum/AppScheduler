@@ -1,7 +1,5 @@
 package com.meldcx.appscheduler.ui.currency
 
-import android.util.Log
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,23 +17,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-
 class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyListRepositoryInterface) :
     ViewModel() {
-    val intent = Channel<ConverterIntent>()
-    val currencyListLiveData = MutableLiveData<CurrencyData>()
+    val intentAction = Channel<ConverterIntent>()
+    val currencyLiveData = MutableLiveData<CurrencyData>()
+    private var selectedRate = MutableLiveData<Double>(0.0)
     private val _dataState = MutableStateFlow<AppState>(AppState.Idle)
     val dataState: StateFlow<AppState>
         get() = _dataState
-
-    private var text: ObservableField<Rate>? = null
-    fun ViewModel() {
-        text = ObservableField()
-    }
-
-    fun getText(): ObservableField<Rate>? {
-        return text
-    }
 
     init {
         handleIntentAction()
@@ -43,57 +32,51 @@ class CurrencyViewModel internal constructor(private val currencyRepoInterface: 
 
     private fun handleIntentAction() {
         viewModelScope.launch {
-            intent.consumeAsFlow().collect {
+            intentAction.consumeAsFlow().collect {
                 when (it) {
-                    is ConverterIntent.FETCH -> getLatestData()
+                    is ConverterIntent.FETCH -> fetchCurrencyData()
                     is ConverterIntent.StartConversion -> startConversion(it)
                 }
             }
         }
     }
 
-    private fun startConversion(it: ConverterIntent.StartConversion) {
-        if (it.amount == 0.0) return
-        val convertedRateList = ConverterUtil.convertValueAndGet(
-            it.baseRate,
-            it.amount,
-            currencyListLiveData.value?.list
-        )
+    private fun fetchCurrencyData() {
         viewModelScope.launch(Dispatchers.IO) {
             _dataState.value = AppState.Loading
-            _dataState.value = AppState.CompletedConversion(convertedRateList)
+            _dataState.value = AppState.Success(fetchDataFromRepository())
         }
     }
 
-    private fun getLatestData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _dataState.value = AppState.Loading
-            _dataState.value = AppState.Success(getCurrencyRateFromAPI())
-        }
-    }
-
-    private suspend fun getCurrencyRateFromAPI(): CurrencyData? {
+    private suspend fun fetchDataFromRepository(): CurrencyData? {
         val result = currencyRepoInterface.getCurrencyData()
         result?.let { updateSpinnerData(it) }
         return result
     }
 
-    private fun updateSpinnerData(dataFromDB: CurrencyData) {
-        currencyListLiveData.postValue(dataFromDB)
+    private fun startConversion(it: ConverterIntent.StartConversion) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _dataState.value = AppState.Loading
+            _dataState.value = AppState.CompletedConversion(getConvertedCurrencyList(it))
+        }
     }
 
-    fun onTextChangeComplete(text: CharSequence?, position: Int) {
-        Log.d("Spinner Changin...", "onTextChange: " + text.toString())
-        /*if (text.toString().isNotEmpty() && selectedPosition >= 0) {
-            viewModelScope.launch(Dispatchers.IO) {
-                intent.send(
-                    ConverterIntent.StartConversion(
-                        text.toString().toDouble(),
-                        currencyListLiveData.value?.list?.get(selectedPosition)?.rate
-                    )
-                )
-            }
-        }*/
+    private fun getConvertedCurrencyList(it: ConverterIntent.StartConversion): List<Rate> {
+        it.baseRate?.let { selectedRate.postValue(it) }
+        val convertedRateList = ConverterUtil.convertValueAndGet(it.baseRate, it.amount, currencyLiveData.value?.rateList)
+        if (it.amount == 0.0) (convertedRateList as ArrayList<Rate>).clear()
+        return convertedRateList
+    }
+
+    private fun updateSpinnerData(dataFromDB: CurrencyData) {
+        currencyLiveData.postValue(dataFromDB)
+    }
+
+    fun onTextChangeComplete(text: CharSequence?) {
+        val input = if (text.toString().isNotEmpty()) text.toString().toDouble() else 0.0
+        viewModelScope.launch(Dispatchers.IO) {
+            intentAction.send(ConverterIntent.StartConversion(input, selectedRate.value))
+        }
     }
 
 }

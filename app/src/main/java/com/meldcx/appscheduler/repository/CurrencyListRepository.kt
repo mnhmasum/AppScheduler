@@ -7,8 +7,7 @@ import com.meldcx.appscheduler.retrofit.apiClient
 import com.meldcx.appscheduler.utils.Constant
 
 
-class CurrencyListRepository constructor(private val dao: CurrencyDao) :
-    CurrencyListRepositoryInterface {
+class CurrencyListRepository constructor(private val dao: CurrencyDao) : CurrencyListRepositoryInterface {
     override suspend fun insert(currencyData: CurrencyData) {
         dao.insert(currencyData)
         insert(currencyData.rateListFromAPI)
@@ -18,30 +17,37 @@ class CurrencyListRepository constructor(private val dao: CurrencyDao) :
         dao.insert(rate)
     }
 
-    override fun getCurrencyLatestData(): CurrencyData? {
-        val base = dao.currencyBase
+    override fun getCurrencyDataFromDB(): CurrencyData? {
+        val base = getCurrencyBaseDB()
         if (base != null) {
-            val rates = getCurrencyRate()
+            val rates = getCurrencyRateDB()
             base.setRateList(rates)
         }
         return base
     }
 
-    override fun getCurrencyRate(): List<Rate> {
+    override fun getCurrencyBaseDB(): CurrencyData? {
+        return dao.currencyBase
+    }
+
+    override fun getCurrencyRateDB(): List<Rate> {
         return dao.rates
     }
 
     override suspend fun getCurrencyData(): CurrencyData? {
-        val dataFromDB = getCurrencyLatestData()
-        return if (dataFromDB != null && isOfflineAvailable(dataFromDB)) {
-            dataFromDB
-        } else {
-            val result = apiClient().getRepositories(Constant.API_KEY)
-            if (result.isSuccessful) {
-                result.body()?.let { insert(it) }
-            }
-            result.body()
+        val dataFromDB = getCurrencyDataFromDB()
+        return when (dataFromDB != null && isOfflineAvailable(dataFromDB)) {
+            true -> dataFromDB
+            false -> callCurrencyAPI()
         }
+    }
+
+    private suspend fun callCurrencyAPI(): CurrencyData? {
+        val result = apiClient().getRepositories(Constant.API_KEY)
+        if (result.isSuccessful) {
+            result.body()?.let { insert(it) }
+        }
+        return result.body()
     }
 
     private fun isOfflineAvailable(dbResult: CurrencyData) = dbResult.base == "USD"

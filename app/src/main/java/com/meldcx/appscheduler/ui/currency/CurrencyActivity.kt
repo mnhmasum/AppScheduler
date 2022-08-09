@@ -45,7 +45,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
 
         lifecycleScope.launch {
             launch {
-                currencyViewModel.intent.send(ConverterIntent.FETCH)
+                currencyViewModel.intentAction.send(ConverterIntent.FETCH)
             }
             launch {
                 currencyViewModel.dataState.collect { render(it) }
@@ -56,7 +56,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
     private fun render(it: AppState) {
         progressBar.isVisible = it is AppState.Loading
         when (it) {
-            is AppState.Success -> updateRateList(it.data?.list)
+            is AppState.Success -> updateRateList(it.data?.rateList)
             is AppState.CompletedConversion -> updateRateList(it.data)
             is AppState.Error -> toast(it.error)
         }
@@ -66,7 +66,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
         currencyViewAdapter.setCurrencyList(it)
     }
 
-    val changeOfCurrency = ObservableField<Rate>().apply {
+    var changeOfCurrency = ObservableField<Rate>().apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 this@apply.get()?.let { inputSendToConverter(it.rate) }
@@ -78,7 +78,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
         val inputAmount: Double = getInput()
         lifecycleScope.launch {
             val startConversion = ConverterIntent.StartConversion(inputAmount, selectedRate)
-            currencyViewModel.intent.send(startConversion)
+            currencyViewModel.intentAction.send(startConversion)
         }
     }
 

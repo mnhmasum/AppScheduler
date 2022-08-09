@@ -10,6 +10,7 @@ interface CurrencyListRepositoryInterface {
     suspend fun insert(currencyData: CurrencyData)
     suspend fun insert(rate: List<Rate>)
     suspend fun getCurrencyData(): CurrencyData?
-    fun getCurrencyLatestData(): CurrencyData?
-    fun getCurrencyRate(): List<Rate>
+    fun getCurrencyDataFromDB(): CurrencyData?
+    fun getCurrencyBaseDB(): CurrencyData?
+    fun getCurrencyRateDB(): List<Rate>
 }

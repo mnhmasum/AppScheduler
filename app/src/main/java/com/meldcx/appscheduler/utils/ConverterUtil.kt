@@ -15,11 +15,12 @@ class ConverterUtil(var context: Context) {
             inputValue: Double?,
             rateList: List<Rate>?
         ): List<Rate> {
-            val updatedRateList: MutableList<Rate> = ArrayDeque()
+            val updatedRateList: ArrayList<Rate> = ArrayList()
             val usDollar = getDollarRate(rateList)
             if (usDollar != null && rateList != null && inputValue != null) {
                 for (rate in rateList) {
-                    val rateInSelectedBase = convertToBaseRate(selectedBase ?: 0.0, rate.rate ?: 0.0, usDollar.rate)
+                    val rateInSelectedBase =
+                        convertToBaseRate(selectedBase ?: 0.0, rate.rate ?: 0.0, usDollar.rate)
                     val result = inputValue * rateInSelectedBase
                     val newRate = Rate(rate.currencyName, result)
                     updatedRateList.add(newRate)

@@ -52,8 +52,8 @@ fun Context.enableIntervalAPICallAlarmService() {
         PendingIntent.getBroadcast(this, Constant.ALARM_REQUEST_CODE, intent, 0)
     alarmManager.setInexactRepeating(
         AlarmManager.ELAPSED_REALTIME_WAKEUP,
-        10000,
-        10000, alarmPendingIntent
+        AlarmManager.INTERVAL_HALF_HOUR,
+        AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent
     )
     //AlarmManager.INTERVAL_HALF_HOUR
 }
