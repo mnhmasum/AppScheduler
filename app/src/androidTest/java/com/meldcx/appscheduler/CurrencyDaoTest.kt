@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.meldcx.appscheduler.data.AppDatabase
 import com.meldcx.appscheduler.data.CurrencyData
+import com.meldcx.appscheduler.data.Rate
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -31,13 +32,6 @@ class CurrencyDaoTest {
     }
 
     @Test
-    fun testLoadData() {
-        val liveData = taskDatabase!!.alarmDao().schedules
-        val items = LiveDataTestUtil.getValue(liveData)
-        assertThat(items?.size, Is(1))
-    }
-
-    @Test
     fun testInsertCurrencyBaseInfo() {
         val currencyData = CurrencyData()
         currencyData.id = 1
@@ -45,7 +39,26 @@ class CurrencyDaoTest {
         taskDatabase?.currencyDao()?.insert(currencyData)
         val data = taskDatabase!!.currencyDao().currencyBase
         assertThat(data?.base, Is("USD"))
-        //assertThat(taskList.size, Is(1))
+    }
+
+    @Test
+    fun testInsertCurrencyRatesInfo() {
+        val rate = Rate("USD", 1.0)
+        val rates:ArrayList<Rate> = ArrayList()
+        rates.add(rate)
+        taskDatabase?.currencyDao()?.insert(rates)
+        val data = taskDatabase!!.currencyDao().rates
+        assertThat(data.size, Is(1))
+    }
+
+    @Test
+    fun testFetchCurrencyData() {
+        val rates:ArrayList<Rate> = ArrayList()
+        rates.add(Rate("USD", 1.0))
+        rates.add(Rate("BDT", 87.0))
+        taskDatabase?.currencyDao()?.insert(rates)
+        val items = taskDatabase!!.currencyDao().rates
+        assertThat(items?.size, Is(2))
     }
 
 }
