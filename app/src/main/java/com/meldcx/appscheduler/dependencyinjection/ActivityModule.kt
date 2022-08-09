@@ -9,7 +9,7 @@ import com.meldcx.appscheduler.dependencyinjection.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository
-import com.meldcx.appscheduler.repository.CurrencyListRepository
+import com.meldcx.appscheduler.repository.CurrencyDataRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.create.CreateScheduleViewModel
@@ -35,8 +35,8 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
-    fun provideCurrencyRepository(currencyDao: CurrencyDao): CurrencyListRepository {
-        return CurrencyListRepository(currencyDao)
+    fun provideCurrencyRepository(currencyDao: CurrencyDao): CurrencyDataRepository {
+        return CurrencyDataRepository(currencyDao)
     }
 
     @Provides
@@ -58,7 +58,7 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideCurrencyViewModel(currencyListRepository: CurrencyListRepository): CurrencyViewModel {
+    fun provideCurrencyViewModel(currencyListRepository: CurrencyDataRepository): CurrencyViewModel {
         return CurrencyViewModel(currencyListRepository)
     }
 

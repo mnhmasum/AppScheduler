@@ -7,7 +7,7 @@ import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.data.ConverterIntent
 import com.meldcx.appscheduler.data.CurrencyData
 import com.meldcx.appscheduler.data.Rate
-import com.meldcx.appscheduler.repository.CurrencyListRepositoryInterface
+import com.meldcx.appscheduler.repository.CurrencyDataRepositoryInterface
 import com.meldcx.appscheduler.utils.ConverterUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyListRepositoryInterface) :
+class CurrencyViewModel internal constructor(private val currencyRepoInterface: CurrencyDataRepositoryInterface) :
     ViewModel() {
     val intentAction = Channel<ConverterIntent>()
     val currencyLiveData = MutableLiveData<CurrencyData>()

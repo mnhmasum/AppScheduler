@@ -6,7 +6,7 @@ import com.meldcx.appscheduler.data.Rate
 import retrofit2.Response
 
 
-interface CurrencyListRepositoryInterface {
+interface CurrencyDataRepositoryInterface {
     suspend fun insert(currencyData: CurrencyData)
     suspend fun insert(rate: List<Rate>)
     suspend fun getCurrencyData(): CurrencyData?

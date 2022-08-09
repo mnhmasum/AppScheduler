@@ -7,7 +7,7 @@ import com.meldcx.appscheduler.retrofit.apiClient
 import com.meldcx.appscheduler.utils.Constant
 
 
-class CurrencyListRepository constructor(private val dao: CurrencyDao) : CurrencyListRepositoryInterface {
+class CurrencyDataRepository constructor(private val dao: CurrencyDao) : CurrencyDataRepositoryInterface {
     override suspend fun insert(currencyData: CurrencyData) {
         dao.insert(currencyData)
         insert(currencyData.rateListFromAPI)

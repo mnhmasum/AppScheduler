@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import com.meldcx.appscheduler.application.MainApplication
-import com.meldcx.appscheduler.repository.CurrencyListRepository
+import com.meldcx.appscheduler.repository.CurrencyDataRepository
 import com.meldcx.appscheduler.services.RescheduleAlarmsService
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
 import com.meldcx.appscheduler.utils.enableIntervalAPICallAlarmService
@@ -25,7 +25,7 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
             context.enableIntervalAPICallAlarmService()
         } else {
             GlobalScope.launch(Dispatchers.IO) {
-                val repository = CurrencyListRepository(MainApplication.appDatabase.currencyDao())
+                val repository = CurrencyDataRepository(MainApplication.appDatabase.currencyDao())
                 repository.getCurrencyData()
                 Log.d("Alarm Fired", "onReceive: Yes fired up")
             }
