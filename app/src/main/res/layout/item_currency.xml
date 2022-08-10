@@ -8,15 +8,15 @@
 
         <variable
             name="rate"
-            type="com.meldcx.appscheduler.data.ExchangeRate" />
+            type="com.paypay.currencyconverter.data.ExchangeRate" />
 
         <variable
             name="adapter"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyViewAdapter" />
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterViewModel" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyConverterViewModel" />
     </data>
 
     <LinearLayout

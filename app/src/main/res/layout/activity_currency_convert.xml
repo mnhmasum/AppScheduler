@@ -9,19 +9,19 @@
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterViewModel" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyConverterViewModel" />
 
         <variable
             name="adapter"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyViewAdapter" />
 
         <variable
             name="spinnerAdapter"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterSpinnerAdapter" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyConverterSpinnerAdapter" />
 
         <variable
             name="activity"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterActivity" />
+            type="com.paypay.currencyconverter.ui.currency.CurrencyConverterActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
