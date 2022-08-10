@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.ItemCurrencyBinding
-import com.meldcx.appscheduler.data.CurrencyData
-import com.meldcx.appscheduler.data.Rate
+import com.meldcx.appscheduler.data.ExchangeRate
 import java.util.*
 
-class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) :
+class CurrencyViewAdapter(private var currencyConverterViewModel: CurrencyConverterViewModel) :
     RecyclerView.Adapter<CurrencyViewAdapter.CurrencyViewHolder>() {
-    private var currencyRateList: List<Rate>
+    private var currencyExchangeRateList: List<ExchangeRate>
     private lateinit var mContext: Context
 
     inner class CurrencyViewHolder(val recyclerviewAlarmBinding: ItemCurrencyBinding) :
@@ -29,7 +28,7 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) :
         )
         binding.apply {
             adapter = this@CurrencyViewAdapter
-            viewModel = currencyViewModel
+            viewModel = currencyConverterViewModel
         }
         this.mContext = parent.context
         return CurrencyViewHolder(binding)
@@ -55,19 +54,19 @@ class CurrencyViewAdapter(private var currencyViewModel: CurrencyViewModel) :
     }
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
-        holder.recyclerviewAlarmBinding.rate = currencyRateList[position]
+        holder.recyclerviewAlarmBinding.rate = currencyExchangeRateList[position]
     }
 
     override fun getItemCount(): Int {
-        return currencyRateList.size
+        return currencyExchangeRateList.size
     }
 
-    fun setCurrencyList(data: List<Rate>?) {
-        data?.let { this.currencyRateList = it }
+    fun setCurrencyList(data: List<ExchangeRate>?) {
+        data?.let { this.currencyExchangeRateList = it }
         notifyDataSetChanged()
     }
 
     init {
-        currencyRateList = ArrayList()
+        currencyExchangeRateList = ArrayList()
     }
 }

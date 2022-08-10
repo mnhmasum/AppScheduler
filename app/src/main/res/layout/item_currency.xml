@@ -8,7 +8,7 @@
 
         <variable
             name="rate"
-            type="com.meldcx.appscheduler.data.Rate" />
+            type="com.meldcx.appscheduler.data.ExchangeRate" />
 
         <variable
             name="adapter"
@@ -16,7 +16,7 @@
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyViewModel" />
+            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterViewModel" />
     </data>
 
     <LinearLayout

@@ -9,12 +9,12 @@ import com.meldcx.appscheduler.dependencyinjection.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository
-import com.meldcx.appscheduler.repository.CurrencyDataRepository
+import com.meldcx.appscheduler.repository.CurrencyConverterRepository
 import com.meldcx.appscheduler.ui.applist.AppListAdapter
 import com.meldcx.appscheduler.ui.applist.AppListViewModel
 import com.meldcx.appscheduler.ui.create.CreateScheduleViewModel
 import com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter
-import com.meldcx.appscheduler.ui.currency.CurrencyViewModel
+import com.meldcx.appscheduler.ui.currency.CurrencyConverterViewModel
 import com.meldcx.appscheduler.ui.main.MainViewAdapter
 import com.meldcx.appscheduler.ui.main.MainViewModel
 
@@ -35,8 +35,8 @@ class ActivityModule(private val context: Context) {
     }
 
     @Provides
-    fun provideCurrencyRepository(currencyDao: CurrencyDao): CurrencyDataRepository {
-        return CurrencyDataRepository(currencyDao)
+    fun provideCurrencyRepository(currencyDao: CurrencyDao): CurrencyConverterRepository {
+        return CurrencyConverterRepository(currencyDao)
     }
 
     @Provides
@@ -58,8 +58,8 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideCurrencyViewModel(currencyListRepository: CurrencyDataRepository): CurrencyViewModel {
-        return CurrencyViewModel(currencyListRepository)
+    fun provideCurrencyViewModel(currencyListRepository: CurrencyConverterRepository): CurrencyConverterViewModel {
+        return CurrencyConverterViewModel(currencyListRepository)
     }
 
     @Provides
@@ -76,8 +76,8 @@ class ActivityModule(private val context: Context) {
 
     @Provides
     @PerActivity
-    fun provideCurrencyViewAdapter(currencyViewModel: CurrencyViewModel): CurrencyViewAdapter {
-        return CurrencyViewAdapter(currencyViewModel)
+    fun provideCurrencyViewAdapter(currencyConverterViewModel: CurrencyConverterViewModel): CurrencyViewAdapter {
+        return CurrencyViewAdapter(currencyConverterViewModel)
     }
 
     @Provides

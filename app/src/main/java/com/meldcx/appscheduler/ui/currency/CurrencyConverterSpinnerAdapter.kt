@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.meldcx.appscheduler.R
-import com.meldcx.appscheduler.data.Rate
+import com.meldcx.appscheduler.data.ExchangeRate
 import kotlinx.android.synthetic.main.item_rate.view.*
 
-class CurrencySpinnerAdapter(ctx: Context, moods: List<Rate>) : ArrayAdapter<Rate>(ctx, 0, moods) {
+class CurrencyConverterSpinnerAdapter(ctx: Context, moods: List<ExchangeRate>) : ArrayAdapter<ExchangeRate>(ctx, 0, moods) {
 
     override fun getView(position: Int, recycledView: View?, parent: ViewGroup): View {
         return this.createView(position, recycledView, parent)

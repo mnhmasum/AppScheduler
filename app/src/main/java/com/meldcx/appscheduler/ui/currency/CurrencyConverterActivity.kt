@@ -7,9 +7,11 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.lifecycleScope
 import com.meldcx.appscheduler.R
-import com.meldcx.appscheduler.data.AppState
+import com.meldcx.appscheduler.data.DataState
+import com.meldcx.appscheduler.data.DataState.*
 import com.meldcx.appscheduler.data.ConverterIntent
-import com.meldcx.appscheduler.data.Rate
+import com.meldcx.appscheduler.data.CurrencyResponse
+import com.meldcx.appscheduler.data.ExchangeRate
 import com.meldcx.appscheduler.databinding.ActivityCurrencyConvertBinding
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
@@ -20,9 +22,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
+class CurrencyConverterActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
     @Inject
-    lateinit var currencyViewModel: CurrencyViewModel
+    lateinit var currencyConverterViewModel: CurrencyConverterViewModel
 
     @Inject
     lateinit var currencyViewAdapter: CurrencyViewAdapter
@@ -38,35 +40,41 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initComponents() {
         binding.apply {
-            viewModel = currencyViewModel
+            viewModel = currencyConverterViewModel
             adapter = currencyViewAdapter
-            activity = this@CurrencyActivity
+            activity = this@CurrencyConverterActivity
         }
 
         lifecycleScope.launch {
             launch {
-                currencyViewModel.intentAction.send(ConverterIntent.FETCH)
+                currencyConverterViewModel.intentAction.send(ConverterIntent.Fetch)
             }
             launch {
-                currencyViewModel.dataState.collect { render(it) }
+                currencyConverterViewModel.dataState.collect { render(it) }
             }
         }
     }
 
-    private fun render(it: AppState) {
-        progressBar.isVisible = it is AppState.Loading
+    private fun render(it: DataState) {
+        progressBar.isVisible = it is Loading
         when (it) {
-            is AppState.Success -> updateRateList(it.data?.rateList)
-            is AppState.CompletedConversion -> updateRateList(it.data)
-            is AppState.Error -> toast(it.error)
+            is Success -> updateBaseRateSpinner(it.data)
+            is ConversionSuccess -> updateExchangeRateList(it.data)
+            is Error -> toast(it.error)
         }
     }
 
-    private fun updateRateList(it: List<Rate>?) {
+    private fun updateExchangeRateList(it: List<ExchangeRate>?) {
         currencyViewAdapter.setCurrencyList(it)
     }
 
-    var changeOfCurrency = ObservableField<Rate>().apply {
+    private fun updateBaseRateSpinner(it: CurrencyResponse?) {
+        lifecycleScope.launch {
+            currencyConverterViewModel.intentAction.send(ConverterIntent.UpdateSpinner(it))
+        }
+    }
+
+    var changeOfCurrency = ObservableField<ExchangeRate>().apply {
         addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 this@apply.get()?.let { inputSendToConverter(it.rate) }
@@ -74,11 +82,11 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyConvertBinding>() {
         })
     }
 
-    private fun inputSendToConverter(selectedRate:Double?) {
+    private fun inputSendToConverter(selectedRate: Double?) {
         val inputAmount: Double = getInput()
         lifecycleScope.launch {
-            val startConversion = ConverterIntent.StartConversion(inputAmount, selectedRate)
-            currencyViewModel.intentAction.send(startConversion)
+            val startConversion = ConverterIntent.Convert(inputAmount, selectedRate)
+            currencyConverterViewModel.intentAction.send(startConversion)
         }
     }
 

@@ -4,8 +4,8 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.meldcx.appscheduler.data.AppDatabase
-import com.meldcx.appscheduler.data.CurrencyData
-import com.meldcx.appscheduler.data.Rate
+import com.meldcx.appscheduler.data.CurrencyResponse
+import com.meldcx.appscheduler.data.ExchangeRate
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -20,10 +20,7 @@ class CurrencyDaoTest {
 
     @Before
     fun init() {
-        taskDatabase = Room.inMemoryDatabaseBuilder(
-            InstrumentationRegistry.getInstrumentation().context,
-            AppDatabase::class.java
-        ).build()
+        taskDatabase = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java).build()
     }
 
     @After
@@ -33,9 +30,7 @@ class CurrencyDaoTest {
 
     @Test
     fun testInsertCurrencyBaseInfo() {
-        val currencyData = CurrencyData()
-        currencyData.id = 1
-        currencyData.base = "USD"
+        val currencyData = getDummyCurrencyResponse()
         taskDatabase?.currencyDao()?.insert(currencyData)
         val data = taskDatabase!!.currencyDao().currencyBase
         assertThat(data?.base, Is("USD"))
@@ -43,22 +38,34 @@ class CurrencyDaoTest {
 
     @Test
     fun testInsertCurrencyRatesInfo() {
-        val rate = Rate("USD", 1.0)
-        val rates:ArrayList<Rate> = ArrayList()
-        rates.add(rate)
-        taskDatabase?.currencyDao()?.insert(rates)
-        val data = taskDatabase!!.currencyDao().rates
+        val rate = ExchangeRate("BDT", 94.62)
+        val exchangeRates:ArrayList<ExchangeRate> = ArrayList()
+        exchangeRates.add(rate)
+        taskDatabase?.currencyDao()?.insert(exchangeRates)
+        val data = taskDatabase!!.currencyDao().exchangeRates
         assertThat(data.size, Is(1))
     }
 
     @Test
-    fun testFetchCurrencyData() {
-        val rates:ArrayList<Rate> = ArrayList()
-        rates.add(Rate("USD", 1.0))
-        rates.add(Rate("BDT", 87.0))
-        taskDatabase?.currencyDao()?.insert(rates)
-        val items = taskDatabase!!.currencyDao().rates
-        assertThat(items?.size, Is(2))
+    fun testFetchCurrencyRates() {
+        val exchangeRates: ArrayList<ExchangeRate> = getRateList()
+        taskDatabase?.currencyDao()?.insert(exchangeRates)
+        val data = taskDatabase!!.currencyDao().exchangeRates
+        assertThat(data.size, Is(2))
+    }
+
+    private fun getRateList(): ArrayList<ExchangeRate> {
+        val exchangeRates: ArrayList<ExchangeRate> = ArrayList()
+        exchangeRates.add(ExchangeRate("USD", 1.0))
+        exchangeRates.add(ExchangeRate("BDT", 87.0))
+        return exchangeRates
+    }
+
+    private fun getDummyCurrencyResponse(): CurrencyResponse {
+        val currencyData = CurrencyResponse()
+        currencyData.id = 1
+        currencyData.base = "USD"
+        return currencyData
     }
 
 }

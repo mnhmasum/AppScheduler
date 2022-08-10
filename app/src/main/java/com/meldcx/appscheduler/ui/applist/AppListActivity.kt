@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.meldcx.appscheduler.data.AppItem
 import com.meldcx.appscheduler.data.AppListIntent
-import com.meldcx.appscheduler.data.AppState
+import com.meldcx.appscheduler.data.DataState
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
@@ -46,12 +46,12 @@ class AppListActivity : BaseActivity<ActivityAppListBinding>() {
 
     }
 
-    private fun render(it: AppState) {
-        progressBar.isVisible = it is AppState.Loading
+    private fun render(it: DataState) {
+        progressBar.isVisible = it is DataState.Loading
         when (it) {
-            is AppState.Apps -> appListAdapter.setApps(it.data)
-            is AppState.App -> showSelectedApp(it.app)
-            is AppState.Error -> toast(it.error)
+            is DataState.Apps -> appListAdapter.setApps(it.data)
+            is DataState.Data -> showSelectedApp(it.app)
+            is DataState.Error -> toast(it.error)
         }
     }
 

@@ -1,8 +1,7 @@
 package com.meldcx.appscheduler.utils
 
 import android.content.Context
-import android.net.ConnectivityManager
-import com.meldcx.appscheduler.data.Rate
+import com.meldcx.appscheduler.data.ExchangeRate
 
 class ConverterUtil(var context: Context) {
     fun baseToDollar(base: Double, dollarRate: Double): Double {
@@ -10,35 +9,26 @@ class ConverterUtil(var context: Context) {
     }
 
     companion object {
-        fun convertValueAndGet(
-            selectedBase: Double?,
-            inputValue: Double?,
-            rateList: List<Rate>?
-        ): List<Rate> {
-            val updatedRateList: ArrayList<Rate> = ArrayList()
-            val usDollar = getDollarRate(rateList)
-            if (usDollar != null && rateList != null && inputValue != null) {
-                for (rate in rateList) {
-                    val rateInSelectedBase =
-                        convertToBaseRate(selectedBase ?: 0.0, rate.rate ?: 0.0, usDollar.rate)
+        fun convertValueAndGet(selectedBase: Double?, inputValue: Double?, exchangeRateList: List<ExchangeRate>?): List<ExchangeRate> {
+            val updatedExchangeRateList: ArrayList<ExchangeRate> = ArrayList()
+            val usDollar = getDollarRate(exchangeRateList)
+            if (usDollar != null && exchangeRateList != null && inputValue != null) {
+                for (rate in exchangeRateList) {
+                    val rateInSelectedBase = convertToBaseRate(selectedBase ?: 0.0, rate.rate ?: 0.0, usDollar.rate)
                     val result = inputValue * rateInSelectedBase
-                    val newRate = Rate(rate.currencyName, result)
-                    updatedRateList.add(newRate)
+                    val newRate = ExchangeRate(rate.currencyName, result)
+                    updatedExchangeRateList.add(newRate)
                 }
             }
 
-            return updatedRateList
+            return updatedExchangeRateList
         }
 
-        private fun getDollarRate(rateList: List<Rate>?): Rate? {
-            return rateList?.find { it.currencyName == "USD" }
+        private fun getDollarRate(exchangeRateList: List<ExchangeRate>?): ExchangeRate? {
+            return exchangeRateList?.find { it.currencyName == "USD" }
         }
 
-        fun convertToBaseRate(
-            baseRate: Double?,
-            selectedCurrency: Double?,
-            dollarRate: Double?
-        ): Double {
+        fun convertToBaseRate(baseRate: Double?, selectedCurrency: Double?, dollarRate: Double?): Double {
             return if (dollarRate != null && baseRate != null && selectedCurrency != null) {
                 val selectedCurrencyToDollar = dollarRate / selectedCurrency
                 val baseToDollar = dollarRate / baseRate
@@ -46,7 +36,6 @@ class ConverterUtil(var context: Context) {
             } else {
                 0.0
             }
-
         }
     }
 }

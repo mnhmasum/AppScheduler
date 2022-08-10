@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meldcx.appscheduler.data.AppItem
 import com.meldcx.appscheduler.data.AppListIntent
-import com.meldcx.appscheduler.data.AppState
+import com.meldcx.appscheduler.data.DataState
 import com.meldcx.appscheduler.repository.AppListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 
 class AppListViewModel(private val appListRepository: AppListRepository) : ViewModel() {
     val appListIntent = Channel<AppListIntent>(Channel.UNLIMITED)
-    private val _dataState = MutableStateFlow<AppState>(AppState.Idle)
-    val dataState: StateFlow<AppState>
+    private val _dataState = MutableStateFlow<DataState>(DataState.Idle)
+    val dataState: StateFlow<DataState>
         get() = _dataState
 
     init {
@@ -36,14 +36,14 @@ class AppListViewModel(private val appListRepository: AppListRepository) : ViewM
 
     private fun fetchInstalledApps() {
         viewModelScope.launch(Dispatchers.Default) {
-            _dataState.value = AppState.Loading
-            _dataState.value = AppState.Apps(appListRepository.getInstalledApps())
+            _dataState.value = DataState.Loading
+            _dataState.value = DataState.Apps(appListRepository.getInstalledApps())
         }
     }
 
     fun selectApp(appItem: AppItem) {
         viewModelScope.launch(Dispatchers.Main) {
-            _dataState.value = AppState.App(appItem)
+            _dataState.value = DataState.Data(appItem)
         }
     }
 }

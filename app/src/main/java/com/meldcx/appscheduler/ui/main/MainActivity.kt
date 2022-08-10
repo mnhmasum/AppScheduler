@@ -4,8 +4,7 @@ import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.databinding.ActivityMainBinding
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
-import com.meldcx.appscheduler.ui.create.CreateAlarmActivity
-import com.meldcx.appscheduler.ui.currency.CurrencyActivity
+import com.meldcx.appscheduler.ui.currency.CurrencyConverterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -35,6 +34,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     fun openCreateScheduleActivity() {
         //startActivity(CreateAlarmActivity::class.java, false)
-        startActivity(CurrencyActivity::class.java, false)
+        startActivity(CurrencyConverterActivity::class.java, false)
     }
 }

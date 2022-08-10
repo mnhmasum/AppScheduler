@@ -20,7 +20,7 @@
         android:roundIcon="@drawable/ic_repeat_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppScheduler">
-        <activity android:name=".ui.currency.CurrencyActivity">
+        <activity android:name=".ui.currency.CurrencyConverterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

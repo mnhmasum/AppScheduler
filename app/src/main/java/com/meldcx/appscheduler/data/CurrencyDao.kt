@@ -5,22 +5,22 @@ import androidx.room.*
 @Dao
 interface CurrencyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(rate: CurrencyData?)
+    fun insert(rate: CurrencyResponse?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(rate: Rate?)
+    fun insert(exchangeRate: ExchangeRate?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(rates: List<Rate?>?)
+    fun insert(exchangeRates: List<ExchangeRate?>?)
 
     @Query("DELETE FROM schedule_table")
     fun deleteAll()
 
     @get:Query("SELECT * FROM currency_rate")
-    val rates: List<Rate>
+    val exchangeRates: List<ExchangeRate>
 
     @get:Query("SELECT * FROM currency_base LIMIT 1")
-    val currencyBase: CurrencyData?
+    val currencyBase: CurrencyResponse?
 
     @Update
     fun update(schedule: Schedule?)

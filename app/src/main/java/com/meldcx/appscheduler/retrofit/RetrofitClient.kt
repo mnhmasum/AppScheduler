@@ -35,13 +35,26 @@ private fun getRetrofitBuilderDefaults() =
 private fun provideOkHttpClientOAuth(cache: Cache): OkHttpClient =
     httpClientBuilder().cache(cache).build()
 
+private fun provideOkHttpClientOAuth(): OkHttpClient =
+    httpClientBuilder().build()
+
 private fun createRetrofit(application: Application): Retrofit =
     getRetrofitBuilderDefaults().client(provideOkHttpClientOAuth(provideHttpCache(application)))
+        .build()
+
+private fun createRetrofit(): Retrofit =
+    getRetrofitBuilderDefaults().client(provideOkHttpClientOAuth())
         .build()
 
 fun initRetrofit(application: Application) {
     if (retrofitOption == null) {
         retrofitOption = createRetrofit(application)
+    }
+}
+
+fun initRetrofit() {
+    if (retrofitOption == null) {
+        retrofitOption = createRetrofit()
     }
 }
 

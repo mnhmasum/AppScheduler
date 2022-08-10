@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyViewModel" />
+            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterViewModel" />
 
         <variable
             name="adapter"
@@ -17,11 +17,11 @@
 
         <variable
             name="spinnerAdapter"
-            type="com.meldcx.appscheduler.ui.currency.CurrencySpinnerAdapter" />
+            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterSpinnerAdapter" />
 
         <variable
             name="activity"
-            type="com.meldcx.appscheduler.ui.currency.CurrencyActivity" />
+            type="com.meldcx.appscheduler.ui.currency.CurrencyConverterActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
