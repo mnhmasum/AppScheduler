@@ -7,8 +7,6 @@ import android.content.Intent
 import android.os.Build
 import android.widget.TimePicker
 import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
-import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.databinding.ActivityCreatealarmBinding
 import java.util.*
 
 fun getTimePickerHour(resId: TimePicker): Int =
@@ -25,25 +23,6 @@ fun getTimePickerMinute(resId: TimePicker): Int =
         resId.currentMinute
     }
 
-fun Context.buildTask(binding: ActivityCreatealarmBinding, appId: String): Schedule {
-    return Schedule(
-        Random().nextInt(Int.MAX_VALUE),
-        getTimePickerHour(binding.timePicker),
-        getTimePickerMinute(binding.timePicker),
-        binding.textAppPackageName.text.toString(),
-        appId,
-        System.currentTimeMillis(),
-        true,
-        binding.checkRecurring.isChecked,
-        binding.checkMon.isChecked,
-        binding.checkTue.isChecked,
-        binding.checkWed.isChecked,
-        binding.checkThu.isChecked,
-        binding.checkFri.isChecked,
-        binding.checkSat.isChecked,
-        binding.checkSun.isChecked
-    )
-}
 
 fun Context.enableIntervalAPICallAlarmService() {
     val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager

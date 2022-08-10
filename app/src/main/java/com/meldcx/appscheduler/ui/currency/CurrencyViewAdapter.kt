@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.meldcx.appscheduler.R
-import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.databinding.ItemCurrencyBinding
 import com.meldcx.appscheduler.data.ExchangeRate
 import java.util.*
@@ -32,21 +31,6 @@ class CurrencyViewAdapter(private var currencyConverterViewModel: CurrencyConver
         }
         this.mContext = parent.context
         return CurrencyViewHolder(binding)
-    }
-
-    fun onToggle(schedule: Schedule, isChecked: Boolean) {
-        if (isChecked) {
-            schedule.schedule(mContext)
-            //currencyViewModel.update(schedule)
-        } else {
-            schedule.cancelAlarm(mContext)
-            //currencyViewModel.update(schedule)
-        }
-    }
-
-    fun delete(schedule: Schedule) {
-        //currencyViewModel.delete(schedule)
-        schedule.cancelAlarm(mContext)
     }
 
     override fun getItemViewType(position: Int): Int {

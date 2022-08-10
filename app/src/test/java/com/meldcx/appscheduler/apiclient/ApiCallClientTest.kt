@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler
+package com.meldcx.appscheduler.apiclient
 
 import com.meldcx.appscheduler.retrofit.apiClient
 import com.meldcx.appscheduler.retrofit.initRetrofit
@@ -12,10 +12,10 @@ class ApiCallClientTest {
         runBlocking {
             initRetrofit()
             val result = apiClient().getRepositories(Constant.API_KEY)
-            val errorBody = result.errorBody()
-            assert(errorBody == null)
-            val responseWrapper = result.body()
-            assert(responseWrapper != null)
+            val error = result.errorBody()
+            assert(error == null)
+            val response = result.body()
+            assert(response != null)
             assert(result.code() == 200)
         }
     }

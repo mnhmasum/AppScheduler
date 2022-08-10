@@ -54,9 +54,9 @@ class FakeCurrencyConverterRepository : CurrencyConverterRepositoryInterface {
         val currencyData = CurrencyResponse()
         currencyData.id = 123
         currencyData.base = "USD"
-        currencyData.license = "randomcharacters"
+        currencyData.license = "https://openexchangerates.org/license"
         currencyData.disclaimer = "some text"
-        currencyData.timestamp = 1000000
+        currencyData.timestamp = 1659498042
         return currencyData
     }
 

@@ -6,6 +6,8 @@ import com.meldcx.appscheduler.dependencyinjection.ApplicationComponent
 import com.meldcx.appscheduler.dependencyinjection.ApplicationModule
 import com.meldcx.appscheduler.dependencyinjection.DaggerApplicationComponent
 import com.meldcx.appscheduler.retrofit.initRetrofit
+import dagger.android.DaggerApplication
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 class MainApplication : Application() {

@@ -15,8 +15,6 @@ import com.meldcx.appscheduler.data.ExchangeRate
 import com.meldcx.appscheduler.databinding.ActivityCurrencyConvertBinding
 import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_app_list.*
-import kotlinx.android.synthetic.main.activity_app_list.progressBar
 import kotlinx.android.synthetic.main.activity_currency_convert.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

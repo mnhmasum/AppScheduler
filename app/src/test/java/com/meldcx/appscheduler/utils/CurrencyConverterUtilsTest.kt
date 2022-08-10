@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler
+package com.meldcx.appscheduler.utils
 
 import com.meldcx.appscheduler.data.ExchangeRate
 import com.meldcx.appscheduler.utils.ConverterUtil

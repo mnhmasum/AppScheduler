@@ -7,12 +7,10 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
-import com.meldcx.appscheduler.data.Schedule
 import com.meldcx.appscheduler.data.CurrencyResponse
 import com.meldcx.appscheduler.data.ExchangeRate
 import com.meldcx.appscheduler.ui.currency.CurrencyViewAdapter
 import com.meldcx.appscheduler.ui.currency.CurrencyConverterSpinnerAdapter
-import com.meldcx.appscheduler.ui.main.MainViewAdapter
 
 @BindingAdapter("setAdapter")
 fun setAdapter(
@@ -34,11 +32,6 @@ fun setAdapterTest(spinner: Spinner, projects: CurrencyResponse?) {
     }
 }
 
-@BindingAdapter("submitList")
-fun submitList(recyclerView: RecyclerView, schedules: List<Schedule>?) {
-    val adapter = recyclerView.adapter as MainViewAdapter?
-    adapter?.setAlarms(schedules ?: listOf())
-}
 
 @BindingAdapter("submitCurrencyList")
 fun submitCurrencyList(recyclerView: RecyclerView, currencyData: CurrencyResponse?) {
