@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.dependencyinjection.scope;
+package com.meldcx.appscheduler.di.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

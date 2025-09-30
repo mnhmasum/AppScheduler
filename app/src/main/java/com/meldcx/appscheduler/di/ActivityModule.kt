@@ -1,10 +1,10 @@
-package com.meldcx.appscheduler.dependencyinjection
+package com.meldcx.appscheduler.di
 
 import android.content.Context
 import com.meldcx.appscheduler.data.ScheduleDao
 import dagger.Module
 import dagger.Provides
-import com.meldcx.appscheduler.dependencyinjection.scope.PerActivity
+import com.meldcx.appscheduler.di.scope.PerActivity
 import com.meldcx.appscheduler.repository.ScheduleRepository
 import com.meldcx.appscheduler.repository.AppListRepository
 import com.meldcx.appscheduler.repository.CreateTaskRepository

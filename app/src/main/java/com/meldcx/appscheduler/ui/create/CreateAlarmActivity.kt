@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
+import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.applist.AppListActivity
 import com.meldcx.appscheduler.ui.base.BaseActivity
 import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
@@ -13,8 +13,6 @@ import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME
 import com.meldcx.appscheduler.utils.buildTask
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.databinding.ActivityCreatealarmBinding
-import kotlinx.android.synthetic.main.activity_createalarm.*
-import java.util.*
 import javax.inject.Inject
 
 class CreateAlarmActivity : BaseActivity<ActivityCreatealarmBinding>() {

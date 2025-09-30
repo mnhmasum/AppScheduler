@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.meldcx.appscheduler.application.MainApplication
-import com.meldcx.appscheduler.dependencyinjection.ActivityModule
-import com.meldcx.appscheduler.dependencyinjection.DaggerMainActivityComponent
-import com.meldcx.appscheduler.dependencyinjection.MainActivityComponent
+import com.meldcx.appscheduler.di.ActivityModule
+import com.meldcx.appscheduler.di.DaggerMainActivityComponent
+import com.meldcx.appscheduler.di.MainActivityComponent
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     lateinit var binding: T
