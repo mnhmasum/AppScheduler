@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.utils
+package com.meldcx.appscheduler.util
 
 import android.content.Context
 import android.os.Build
@@ -38,6 +38,3 @@ fun Context.buildTask(binding: ActivityCreatealarmBinding, appId:String): Schedu
         binding.checkSun.isChecked
     )
 }
-
-
-

@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import com.meldcx.appscheduler.data.AppItem
 
 
-class AppListRepository(private val pm: PackageManager) : AppListRepositoryInterface {
+class AppListRepository(private val pm: PackageManager) : AppListRepositoryImpl {
 
     override suspend fun getInstalledApps(): List<AppItem> {
         val list: ArrayList<AppItem> = ArrayList()

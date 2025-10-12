@@ -28,7 +28,7 @@
         <activity android:name=".ui.create.CreateAlarmActivity" />
         <activity android:name=".ui.applist.AppListActivity" />
 
-        <receiver android:name=".broadcastreceiver.AlarmBroadcastReceiver">
+        <receiver android:name=".system.AlarmBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

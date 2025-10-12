@@ -3,9 +3,9 @@ package com.meldcx.appscheduler.repo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.repository.ScheduleRepositoryInterface
+import com.meldcx.appscheduler.repository.ScheduleRepositoryImpl
 
-class FakeScheduleRepository : ScheduleRepositoryInterface {
+class FakeScheduleRepository : ScheduleRepositoryImpl {
 
     private val scheduleList = mutableListOf<Schedule>()
     private val schedulesLiveData = MutableLiveData<List<Schedule>>(scheduleList)

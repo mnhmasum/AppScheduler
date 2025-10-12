@@ -9,8 +9,8 @@ import com.meldcx.appscheduler.data.AppListIntent
 import com.meldcx.appscheduler.data.AppState
 import com.meldcx.appscheduler.di.MainActivityComponent
 import com.meldcx.appscheduler.ui.base.BaseActivity
-import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
-import com.meldcx.appscheduler.utils.Constant.Companion.APP_NAME
+import com.meldcx.appscheduler.util.Constant.Companion.APP_ID
+import com.meldcx.appscheduler.util.Constant.Companion.APP_NAME
 import com.meldcx.appscheduler.R
 import com.meldcx.appscheduler.databinding.ActivityAppListBinding
 import kotlinx.android.synthetic.main.activity_app_list.*

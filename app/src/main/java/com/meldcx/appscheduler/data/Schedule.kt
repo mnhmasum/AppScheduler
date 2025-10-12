@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.meldcx.appscheduler.broadcastreceiver.AlarmBroadcastReceiver
-import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
+import com.meldcx.appscheduler.system.AlarmBroadcastReceiver
+import com.meldcx.appscheduler.util.Constant.Companion.APP_ID
 import java.util.*
 
 @Entity(tableName = "schedule_table")

@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.utils
+package com.meldcx.appscheduler.util
 
 class Constant {
     companion object {

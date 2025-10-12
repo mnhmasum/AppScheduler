@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.utils
+package com.meldcx.appscheduler.util
 
 import android.view.View
 import androidx.databinding.BindingAdapter

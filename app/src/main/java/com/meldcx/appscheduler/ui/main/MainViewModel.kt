@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meldcx.appscheduler.data.Schedule
-import com.meldcx.appscheduler.repository.ScheduleRepositoryInterface
+import com.meldcx.appscheduler.repository.ScheduleRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel internal constructor(private val scheduleRepository: ScheduleRepositoryInterface) :
+class MainViewModel internal constructor(private val scheduleRepository: ScheduleRepositoryImpl) :
     ViewModel() {
     var scheduleLiveData: LiveData<List<Schedule>> = scheduleRepository.getScheduleLiveData()
 

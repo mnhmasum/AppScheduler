@@ -1,4 +1,4 @@
-package com.meldcx.appscheduler.services
+package com.meldcx.appscheduler.system
 
 import android.content.Intent
 import android.os.IBinder
@@ -10,7 +10,7 @@ import com.meldcx.appscheduler.repository.ScheduleRepository
 class RescheduleAlarmsService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        val alarmRepository = ScheduleRepository(MainApplication.appDatabase.alarmDao())
+        val alarmRepository = ScheduleRepository(MainApplication.Companion.appDatabase.alarmDao())
         alarmRepository.alarmsLiveData.observe(this, { schedules: List<Schedule> ->
             for (alarm in schedules) {
                 if (alarm.isStarted) {

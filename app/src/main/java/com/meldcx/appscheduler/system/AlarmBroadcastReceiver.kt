@@ -1,12 +1,11 @@
-package com.meldcx.appscheduler.broadcastreceiver
+package com.meldcx.appscheduler.system
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import com.meldcx.appscheduler.services.RescheduleAlarmsService
-import com.meldcx.appscheduler.utils.Constant.Companion.APP_ID
+import com.meldcx.appscheduler.util.Constant.Companion.APP_ID
 import java.util.*
 
 
